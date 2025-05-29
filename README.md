@@ -1,4 +1,30 @@
 
+# CHANGELOG - 2025-05-29
+
+## ✨ New Features Added
+
+- **Active Navigation Links**: Scroll-spy functionality highlights current section in navbar
+- **Dark/Light Mode Toggle**: Fully functional theme switcher with localStorage persistence and OS preference detection
+- **Language Switcher**: Complete Bosnian ⇄ English translation system with JSON files
+- **Enhanced Reviews Carousel**: 6 client reviews with autoplay, pause on hover, and smooth transitions
+- **FAQ Accordion**: Interactive expandable Q&A section with smooth animations
+- **Improved Accessibility**: Better focus states, keyboard navigation, and WCAG compliance
+
+## 🔧 Technical Improvements
+
+- **Modular Translations**: Text content moved to separate `lang/bs.json` and `lang/en.json` files
+- **Performance Optimizations**: Throttled scroll events and efficient DOM updates
+- **Enhanced Animations**: Smooth transitions for all interactive elements
+- **Mobile Experience**: Better touch targets and responsive interactions
+- **Code Organization**: Clear separation of concerns with commented functions
+
+## 📁 New Files
+
+- `lang/bs.json` - Bosnian translations
+- `lang/en.json` - English translations
+
+---
+
 # Web Fokus - Portfolio Website
 
 A modern, bilingual (Bosnian/English) portfolio website for Web Fokus - a web development agency specializing in affordable, fast-turnaround websites for small businesses in Bosnia and Herzegovina.
