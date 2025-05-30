@@ -11,14 +11,14 @@ const Portfolio = () => {
     {
       title: t('portfolio_salon_title'),
       description: t('portfolio_salon_desc'),
-      image: '/placeholder.svg',
-      link: '#'
+      image: 'portfolio/salon.webp',
+      link: 'https://cerulean-taffy-73a3e9.netlify.app/'
     },
     {
       title: t('portfolio_apartment_title'),
       description: t('portfolio_apartment_desc'),
-      image: '/placeholder.svg',
-      link: '#'
+      image: 'portfolio/apartman.webp',
+      link: 'https://cerulean-taffy-73a3e9.netlify.app'
     }
   ];
 
@@ -50,9 +50,16 @@ const Portfolio = () => {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
-                <Button variant="outline" size="sm" className="w-full">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  {t('portfolio_view')}
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {t('portfolio_view')}
+                  </a>
                 </Button>
               </div>
             </div>
