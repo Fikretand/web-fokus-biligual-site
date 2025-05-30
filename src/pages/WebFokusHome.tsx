@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -11,15 +10,12 @@ import Reviews from "@/components/Reviews";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { useTranslation } from "@/hooks/useTranslation";
 import { useTheme } from "@/hooks/useTheme";
 
 const WebFokusHome = () => {
-  const { initializeLanguage } = useTranslation();
   const { initializeTheme } = useTheme();
 
   useEffect(() => {
-    initializeLanguage();
     initializeTheme();
   }, []);
 

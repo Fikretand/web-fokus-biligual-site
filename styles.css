@@ -266,16 +266,10 @@ html * {
     position: relative;
 }
 
+/* Force remove any after pseudo-element from section-header */
 .section-header::after {
-    content: '';
-    position: absolute;
-    bottom: -2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3rem;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    border-radius: 1px;
+    content: none !important;
+    display: none !important;
 }
 
 /* Enhanced focus states for accessibility */
@@ -350,4 +344,7 @@ html * {
         transition: none !important;
         animation: none !important;
     }
+}
+body {
+  overflow-x: hidden;
 }

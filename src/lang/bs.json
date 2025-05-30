@@ -1,4 +1,3 @@
-
 {
   "nav_home": "Početna",
   "nav_services": "Usluge",
@@ -98,14 +97,14 @@
   "review3_text": "Konačno imamo sajt koji funkcioniše na svim uređajima. Hvala vam!",
   "review3_author": "Dr. Ena Begić, Stomatološka ordinacija",
   
-  "review4_text": "Great service and modern website. Our international guests love it!",
+   "review4_text": "Sjajna usluga i moderan sajt. Naši međunarodni gosti ga obožavaju!",
   "review4_author": "Hotel Manager, Sarajevo",
   
-  "review5_text": "Professional team, delivered exactly what we needed on time.",
-  "review5_author": "Restaurant Owner, Mostar",
-  
-  "review6_text": "Best investment for our business. The booking system works perfectly!",
-  "review6_author": "Beauty Salon, Tuzla",
+  "review5_text": "Profesionalan tim, isporučili su tačno ono što smo trebali na vrijeme.",
+  "review5_author": "Vlasnik restorana, Mostar",
+
+  "review6_text": "Najbolja investicija za naš posao. Sistem rezervacija radi savršeno!",
+  "review6_author": "Salon ljepote, Tuzla",
   
   "faq_title": "Često postavljana pitanja",
   "faq_subtitle": "Odgovori na najčešća pitanja o našim uslugama",
