@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -259,17 +260,6 @@ html * {
 .notification {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Scroll indicator for sections */
-.section-header {
-    position: relative;
-}
-
-/* Force remove any after pseudo-element from section-header */
-.section-header::after {
-    content: none !important;
-    display: none !important;
 }
 
 /* Enhanced focus states for accessibility */

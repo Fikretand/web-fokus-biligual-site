@@ -244,23 +244,6 @@ html * {
     left: 100%;
 }
 
-/* Scroll indicator for sections */
-.section-header {
-    position: relative;
-}
-
-.section-header::after {
-    content: '';
-    position: absolute;
-    bottom: -2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3rem;
-    height: 2px;
-    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
-    border-radius: 1px;
-}
-
 /* Enhanced focus states for accessibility */
 .nav-link:focus-visible,
 .btn:focus-visible,
