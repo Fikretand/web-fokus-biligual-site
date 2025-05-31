@@ -1,3 +1,4 @@
+
 {
   "nav_home": "Home",
   "nav_services": "Services",
@@ -34,6 +35,7 @@
   
   "service_themes_title": "Dark/Light Mode",
   "service_themes_desc": "Modern design with dark and light theme support",
+  "service_themes_details": "Provides users with the option to choose their preferred theme – light or dark.",
   
   "service_speed_title": "Fast Delivery",
   "service_speed_desc": "Your website ready in maximum 5 working days",
@@ -158,5 +160,19 @@
   "footer_process": "Process",
   "footer_pricing": "Pricing",
   "footer_contact": "Contact",
-  "footer_rights": "All rights reserved."
+  "footer_rights": "All rights reserved.",
+  
+  "admin_title": "Admin Panel",
+  "admin_subtitle": "Manage contact messages",
+  "admin_login": "Login",
+  "admin_logout": "Logout",
+  "admin_email": "Email",
+  "admin_password": "Password",
+  "admin_no_messages": "No messages yet",
+  "admin_loading": "Loading...",
+  "admin_error": "Error loading messages",
+  "admin_name": "Name",
+  "admin_phone": "Phone",
+  "admin_message": "Message",
+  "admin_date": "Date"
 }

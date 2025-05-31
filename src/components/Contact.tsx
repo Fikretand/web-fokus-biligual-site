@@ -1,48 +1,13 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import { MapPin, Mail, Phone } from "lucide-react";
-import { toast } from "sonner";
+import { useContactForm } from "@/hooks/useContactForm";
 
 const Contact = () => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simple validation
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Molimo popunite sva obavezna polja / Please fill all required fields');
-      return;
-    }
-
-    // Create mailto link
-    const subject = encodeURIComponent('Web Fokus - Upit za web sajt');
-    const body = encodeURIComponent(
-      `Ime: ${formData.name}\nEmail: ${formData.email}\nTelefon: ${formData.phone}\n\nPoruka:\n${formData.message}`
-    );
-    
-    window.location.href = `mailto:info@webfokus.ba?subject=${subject}&body=${body}`;
-    
-    toast.success('Poruka je pripremljena / Message prepared');
-    
-    // Reset form
-    setFormData({ name: '', email: '', phone: '', message: '' });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+  const { formData, handleChange, handleSubmit, isSubmitting } = useContactForm();
 
   return (
     <section id="contact" className="py-20 bg-background">
@@ -151,8 +116,12 @@ const Contact = () => {
               />
             </div>
 
-            <Button type="submit" className="w-full btn bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-              {t('contact_form_submit')}
+            <Button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full btn bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+            >
+              {isSubmitting ? t('admin_loading') : t('contact_form_submit')}
             </Button>
           </form>
         </div>
