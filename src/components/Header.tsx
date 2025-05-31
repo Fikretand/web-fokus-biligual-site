@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const { language, setLanguage, t } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
+  const { currentLanguage, switchLanguage, t } = useTranslation();
 
   const navItems = [
     { href: "#services", label: t('nav_services') },
@@ -17,16 +17,11 @@ const Header = () => {
     { href: "#process", label: t('nav_process') },
     { href: "#pricing", label: t('nav_pricing') },
     { href: "#reviews", label: t('nav_reviews') },
-    { href: "#faq", label: t('nav_faq') },
     { href: "#contact", label: t('nav_contact') }
   ];
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'bs' : 'en');
+    switchLanguage(currentLanguage === 'en' ? 'bs' : 'en');
   };
 
   return (
@@ -75,7 +70,7 @@ const Header = () => {
               onClick={toggleLanguage}
               className="text-sm"
             >
-              {language.toUpperCase()}
+              {currentLanguage.toUpperCase()}
             </Button>
 
             <Button
