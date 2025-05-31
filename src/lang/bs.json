@@ -17,24 +17,34 @@
   
   "service_design_title": "Web dizajn & razvoj",
   "service_design_desc": "Moderni, responzivni dizajn prilagođen vašem brendu",
+  "service_design_details":"Profesionalni izgled sajta gradi povjerenje i ostavlja jak prvi dojam. Prilagođen dizajn osigurava da se vaš brend istakne.",
+
   
   "service_seo_title": "SEO optimizacija",
   "service_seo_desc": "Osnovna optimizacija za bolje rangiranje u Google pretragama",
-  
+  "service_seo_details":"Optimizacijom sadržaja vaš sajt postaje vidljiviji na Googleu, što znači više posjeta i potencijalnih klijenata.",
+
   "service_multilang_title": "Višejezičnost",
   "service_multilang_desc": "Bosanski i engleski jezik uključeni standardno",
+  "service_multilang_details": "Dvojezični sajt automatski proširuje publiku i omogućava veću dostupnost.",
   
   "service_hosting_title": "Hosting & domena",
   "service_hosting_desc": "Prva godina hostinga i domene uključena u cijenu",
-  
+  "service_hosting_details": "Ne morate se brinuti oko tehničkih detalja – domena i hosting su već uključeni.",
+
   "service_themes_title": "Dark/Light mode",
   "service_themes_desc": "Savremeni dizajn sa podrškom za tamnu i svijetlu temu",
+  "service_themes_details": "Pruža korisnicima opciju da izaberu temu po svom ukusu – svijetlu ili tamnu.", 
   
   "service_speed_title": "Brza isporuka",
-  "service_speed_desc": "Vaš sajt spreman za maksimalno 7 radnih dana",
+  "service_speed_desc": "Vaš sajt spreman za maksimalno 5 radnih dana",
+  "service_speed_details": "Vaša stranica može biti online za samo 5 radnih dana – bez čekanja.",
   
   "service_maintenance_title": "Početno održavanje",
   "service_maintenance_desc": "Besplatno rješavanje kvarova i manje izmjene prva 3 mjeseca",
+  "service_maintenance_details": "Prva 3 mjeseca uključuju besplatne manje izmjene i rješavanje problema.",
+
+  "close": "Zatvori",
   
   "portfolio_title": "Naš portfolio",
   "portfolio_subtitle": "Pogledajte neke od naših uspješnih projekata",
@@ -59,7 +69,7 @@
   "pricing_subtitle": "Transparentne cijene bez skrivenih troškova",
   "pricing_popular": "Najpopularniji",
   "pricing_choose": "Izaberi paket",
-  "pricing_note": "Sve cijene bez PDV-a. Plaćanje u dvije rate moguće.",
+  "pricing_note": "Hosting i domena uključeni u cijenu prvih 12 mjeseci u sva tri paketa.",
   
   "pricing_start_title": "Start",
   "pricing_start_delivery": "7 dana",
@@ -110,7 +120,7 @@
   "faq_subtitle": "Odgovori na najčešća pitanja o našim uslugama",
   
   "faq1_question": "Koliko vremena je potrebno za izradu sajta?",
-  "faq1_answer": "Ovisno o paketu, sajt je spreman za 7-14 radnih dana od potpisivanja ugovora i dobijanja svih potrebnih materijala.",
+  "faq1_answer": "Ovisno o paketu, sajt je spreman za 5-14 radnih dana od potpisivanja ugovora i dobijanja svih potrebnih materijala.",
   
   "faq2_question": "Da li mogu da mijenjam sadržaj na sajtu?",
   "faq2_answer": "Da, pružamo vam kratak trening kako da mijenjate osnovni sadržaj. Za složenije izmjene, tu smo da pomognemo.",

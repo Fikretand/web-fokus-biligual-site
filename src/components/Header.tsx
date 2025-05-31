@@ -56,8 +56,14 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-b border-border z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold text-primary">Web Fokus</h1>
+          <div className="flex items-center space-x-3">
+            <img
+              src="/logo.png" // ili "/logo.png"
+              alt="Web Fokus logo"
+              className="h-16 w-auto" // visina 36px, širina automatska
+              style={{ maxWidth: 100, maxHeight: 64 }} // maksimalna širina 100px, maksimalna visina 64px
+            />
+            <span className="text-2xl font-bold text-primary">Web Fokus</span>
           </div>
 
           {/* Desktop Navigation */}

@@ -14,27 +14,36 @@
   
   "services_title": "Our Services",
   "services_subtitle": "Everything you need for successful online presence",
+  "service_design_details": "Professional site appearance builds trust and leaves a strong first impression. Custom design ensures your brand stands out.",
   
   "service_design_title": "Web Design & Development",
   "service_design_desc": "Modern, responsive design tailored to your brand",
+  "service_design_details": "Professional site appearance builds trust and leaves a strong first impression. Custom design ensures your brand stands out.",
   
   "service_seo_title": "SEO Optimization",
   "service_seo_desc": "Basic optimization for better Google search rankings",
+  "service_seo_details": "Optimizing your content makes your site more visible on Google, leading to more visits and potential clients.",
   
   "service_multilang_title": "Multilingual",
   "service_multilang_desc": "Bosnian and English languages included as standard",
+  "service_multilang_details": "A bilingual site automatically expands your audience and increases accessibility.",
   
   "service_hosting_title": "Hosting & Domain",
   "service_hosting_desc": "First year hosting and domain included in price",
+  "service_hosting_details": "You don't have to worry about technical details – domain and hosting are already included.",
   
   "service_themes_title": "Dark/Light Mode",
   "service_themes_desc": "Modern design with dark and light theme support",
   
   "service_speed_title": "Fast Delivery",
-  "service_speed_desc": "Your website ready in maximum 7 working days",
+  "service_speed_desc": "Your website ready in maximum 5 working days",
+  "service_speed_details": "Your page can be online in just 5 working days – no waiting.",
   
   "service_maintenance_title": "Initial Maintenance",
   "service_maintenance_desc": "Free bug fixes and minor changes for first 3 months",
+  "service_maintenance_details": "The first 3 months include free minor changes and bug fixes.",
+
+  "close": "Close",
   
   "portfolio_title": "Our Portfolio",
   "portfolio_subtitle": "Check out some of our successful projects",
@@ -59,7 +68,7 @@
   "pricing_subtitle": "Transparent pricing with no hidden costs",
   "pricing_popular": "Most Popular",
   "pricing_choose": "Choose Package",
-  "pricing_note": "All prices without VAT. Payment in two installments possible.",
+  "pricing_note": "Hosting and domain included in the price for the first 12 months in all three packages.",
   
   "pricing_start_title": "Start",
   "pricing_start_delivery": "7 days",
@@ -110,7 +119,7 @@
   "faq_subtitle": "Answers to the most common questions about our services",
   
   "faq1_question": "How long does it take to create a website?",
-  "faq1_answer": "Depending on the package, the website is ready in 7-14 working days from contract signing and receiving all necessary materials.",
+  "faq1_answer": "Depending on the package, the website is ready in 5-14 working days from contract signing and receiving all necessary materials.",
   
   "faq2_question": "Can I change the content on the website?",
   "faq2_answer": "Yes, we provide brief training on how to change basic content. For more complex changes, we're here to help.",

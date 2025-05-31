@@ -1,46 +1,53 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
 import { Palette, Search, Globe, Server, Moon, Zap, Wrench } from "lucide-react";
 
 const Services = () => {
   const { t } = useTranslation();
+  const [selectedService, setSelectedService] = useState<number | null>(null);
 
   const services = [
     {
-      icon: <Palette className="h-8 w-8" />,
+      icon: <Palette className="h-8 w-8 text-pink-500" />,
       title: t('service_design_title'),
-      description: t('service_design_desc')
+      description: t('service_design_desc'),
+      details: t('service_design_details'), // Dodaj detalje u prevodima
     },
     {
-      icon: <Search className="h-8 w-8" />,
+      icon: <Search className="h-8 w-8 text-blue-500" />,
       title: t('service_seo_title'),
-      description: t('service_seo_desc')
+      description: t('service_seo_desc'),
+      details: t('service_seo_details'),
     },
     {
-      icon: <Globe className="h-8 w-8" />,
+      icon: <Globe className="h-8 w-8 text-green-500" />,
       title: t('service_multilang_title'),
-      description: t('service_multilang_desc')
+      description: t('service_multilang_desc'),
+      details: t('service_multilang_details'),
     },
     {
-      icon: <Server className="h-8 w-8" />,
+      icon: <Server className="h-8 w-8 text-purple-500" />,
       title: t('service_hosting_title'),
-      description: t('service_hosting_desc')
+      description: t('service_hosting_desc'),
+      details: t('service_hosting_details'),
     },
     {
-      icon: <Moon className="h-8 w-8" />,
+      icon: <Moon className="h-8 w-8 text-indigo-500" />,
       title: t('service_themes_title'),
-      description: t('service_themes_desc')
+      description: t('service_themes_desc'),
+      details: t('service_themes_details'),
     },
     {
-      icon: <Zap className="h-8 w-8" />,
+      icon: <Zap className="h-8 w-8 text-yellow-500" />,
       title: t('service_speed_title'),
-      description: t('service_speed_desc')
+      description: t('service_speed_desc'),
+      details: t('service_speed_details'),
     },
     {
-      icon: <Wrench className="h-8 w-8" />,
+      icon: <Wrench className="h-8 w-8 text-gray-500" />,
       title: t('service_maintenance_title'),
-      description: t('service_maintenance_desc')
+      description: t('service_maintenance_desc'),
+      details: t('service_maintenance_details'),
     }
   ];
 
@@ -60,9 +67,10 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="service-card bg-card border border-border rounded-lg p-6 text-center hover:shadow-lg transition-all duration-300"
+              className="service-card bg-card border border-border rounded-lg p-6 text-center hover:shadow-lg transition-all duration-300 cursor-pointer"
+              onClick={() => setSelectedService(index)}
             >
-              <div className="text-primary mb-4 flex justify-center">
+              <div className="mb-4 flex justify-center">
                 {service.icon}
               </div>
               <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
@@ -70,6 +78,31 @@ const Services = () => {
             </div>
           ))}
         </div>
+
+        {selectedService !== null && (
+          <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-900 rounded-lg p-8 max-w-md w-full shadow-lg relative flex flex-col items-center text-center">
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl"
+                onClick={() => setSelectedService(null)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+              <div className="flex justify-center mb-4">
+                {services[selectedService].icon}
+              </div>
+              <h3 className="text-2xl font-bold mb-2">{services[selectedService].title}</h3>
+              <p className="mb-4">{services[selectedService].details}</p>
+              <button
+                className="btn bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded"
+                onClick={() => setSelectedService(null)}
+              >
+                {t('close')}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
