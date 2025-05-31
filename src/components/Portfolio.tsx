@@ -12,7 +12,7 @@ const Portfolio = () => {
       title: t('portfolio_salon_title'),
       description: t('portfolio_salon_desc'),
       image: 'portfolio/salon.webp',
-      link: 'https://cerulean-taffy-73a3e9.netlify.app/'
+      link: 'https://atelierrosa.netlify.app/'
     },
     {
       title: t('portfolio_apartment_title'),
