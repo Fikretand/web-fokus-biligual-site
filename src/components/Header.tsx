@@ -1,83 +1,116 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/hooks/useTheme";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Link } from "react-router-dom";
+import { useTheme } from "@/hooks/useTheme";
+import { Moon, Sun, Menu, X } from "lucide-react";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const { currentLanguage, switchLanguage, t } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
-  const navItems = [
-    { href: "#services", label: t('nav_services') },
-    { href: "#portfolio", label: t('nav_portfolio') },
-    { href: "#process", label: t('nav_process') },
-    { href: "#pricing", label: t('nav_pricing') },
-    { href: "#reviews", label: t('nav_reviews') },
-    { href: "#contact", label: t('nav_contact') }
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['hero', 'services', 'portfolio', 'process', 'pricing', 'reviews', 'contact'];
+      const scrollPosition = window.scrollY + 100;
 
-  const toggleLanguage = () => {
-    switchLanguage(currentLanguage === 'en' ? 'bs' : 'en');
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
   };
 
+  const navItems = [
+    { key: 'hero', label: t('nav_home') },
+    { key: 'services', label: t('nav_services') },
+    { key: 'portfolio', label: t('nav_portfolio') },
+    { key: 'process', label: t('nav_process') },
+    { key: 'pricing', label: t('nav_pricing') },
+    { key: 'reviews', label: t('nav_reviews') },
+    { key: 'contact', label: t('nav_contact') }
+  ];
+
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-4">
-            <Link to="/" className="text-2xl font-bold text-primary">
-              WebFokus
-            </Link>
+    <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-b border-border z-50">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <img
+              src="/logo.png" // ili "/logo.png"
+              alt="Web Fokus logo"
+              className="h-16 w-auto" // visina 36px, širina automatska
+              style={{ maxWidth: 100, maxHeight: 64 }} // maksimalna širina 100px, maksimalna visina 64px
+            />
+            <span className="text-2xl font-bold text-primary">Web Fokus</span>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+          <nav className="hidden md:flex items-center space-x-6">
+            {navItems.map((item) => (
+              <button
+                key={item.key}
+                onClick={() => scrollToSection(item.key)}
+                className={`nav-link transition-colors hover:text-primary ${
+                  activeSection === item.key ? 'active-link text-primary' : ''
+                }`}
               >
                 {item.label}
-              </a>
+              </button>
             ))}
-            <Link
-              to="/admin"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Admin
-            </Link>
           </nav>
 
-          {/* Theme Toggle, Language Toggle, and Mobile Menu */}
+          {/* Controls */}
           <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="w-9 h-9"
+              className="theme-toggle"
+              aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLanguage}
-              className="text-sm"
-            >
-              {currentLanguage.toUpperCase()}
+              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
             </Button>
 
+            {/* Language Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => switchLanguage(currentLanguage === 'bs' ? 'en' : 'bs')}
+              className="lang-toggle"
+            >
+              {currentLanguage === 'bs' ? 'EN' : 'BS'}
+            </Button>
+
+            {/* Mobile Menu Toggle */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden"
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
@@ -86,27 +119,21 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t">
-              {navItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+          <nav className="nav-menu md:hidden mt-4 pb-4 border-t border-border">
+            <div className="flex flex-col space-y-4 pt-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.key}
+                  onClick={() => scrollToSection(item.key)}
+                  className={`nav-link text-left transition-colors hover:text-primary ${
+                    activeSection === item.key ? 'active-link text-primary' : ''
+                  }`}
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
-              <Link
-                to="/admin"
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admin
-              </Link>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>
