@@ -26,28 +26,28 @@ const PortfolioOptimized = () => {
   const projects: PortfolioProject[] = [
     {
       id: 'apartman-rental',
-      title: currentLanguage === 'bs' ? 'Apartman Zlatibor' : 'Apartment Rental Zlatibor',
+      title: currentLanguage === 'bs' ? 'Apartman Ilidža' : 'Apartment Rental Ilidža',
       description: currentLanguage === 'bs' 
         ? 'Moderni sajt za iznajmljivanje apartmana sa online rezervacijama'
         : 'Modern apartment rental website with online booking system',
       image: '/portfolio/apartman.webp',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
       category: 'business',
-      url: 'https://apartman-zlatibor.com',
+      url: 'https://cerulean-taffy-73a3e9.netlify.app/',
       features: currentLanguage === 'bs' 
         ? ['Online rezervacije', 'Galerija slika', 'Kontakt forma', 'Responzivan dizajn']
         : ['Online booking', 'Image gallery', 'Contact form', 'Responsive design']
     },
     {
       id: 'beauty-salon',
-      title: currentLanguage === 'bs' ? 'Salon lepote Amira' : 'Amira Beauty Salon',
+      title: currentLanguage === 'bs' ? 'Salon ljepote Atelier Rosa' : 'Atelier Rosa Beauty Salon',
       description: currentLanguage === 'bs'
         ? 'Elegantni sajt za salon lepote sa galerijom radova i cenikom'
         : 'Elegant beauty salon website with portfolio gallery and pricing',
       image: '/portfolio/salon.webp',
       technologies: ['React', 'CSS3', 'JavaScript', 'Node.js'],
       category: 'business',
-      url: 'https://salon-amira.ba',
+      url: 'hhttps://atelierrosa.netlify.app/',
       features: currentLanguage === 'bs'
         ? ['Galerija radova', 'Cenik usluga', 'Lokacija', 'Mobilna optimizacija']
         : ['Work gallery', 'Service pricing', 'Location', 'Mobile optimization']
