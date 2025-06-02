@@ -1,37 +1,76 @@
+
 import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Mail, Phone, Calendar } from 'lucide-react';
+import { ArrowLeft, Mail, Phone, Calendar, Shield, AlertTriangle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
+import { toast } from 'sonner';
 
 const AdminPage = () => {
   const navigate = useNavigate();
+  const { user, userRole, loading, signOut } = useAuth();
 
-  // Provjera da li je korisnik prijavljen
+  // Enhanced authentication check
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      if (!data.user) {
+    if (!loading) {
+      if (!user) {
+        toast.error('Please log in to access the admin panel.');
         navigate('/login');
+        return;
       }
-    });
-  }, [navigate]);
+      
+      if (userRole !== 'admin') {
+        toast.error('Access denied. Admin privileges required.');
+        navigate('/');
+        return;
+      }
+    }
+  }, [user, userRole, loading, navigate]);
 
-  // Dohvati poruke samo ako je korisnik prijavljen
-  const { data: messages, isLoading, error: fetchError } = useQuery({
-    queryKey: ['messages'],
+  // Fetch messages with enhanced error handling
+  const { data: messages, isLoading: messagesLoading, error: fetchError } = useQuery({
+    queryKey: ['admin-messages'],
     queryFn: async () => {
+      if (!user || userRole !== 'admin') {
+        throw new Error('Unauthorized access');
+      }
+
       const { data, error } = await supabase
         .from('messages')
         .select('*')
         .order('created_at', { ascending: false });
-      if (error) throw error;
+      
+      if (error) {
+        console.error('Database error fetching messages:', error);
+        throw new Error('Failed to fetch messages');
+      }
+      
       return data;
     },
+    enabled: !!user && userRole === 'admin',
+    retry: (failureCount, error) => {
+      // Don't retry on auth errors
+      if (error.message === 'Unauthorized access') return false;
+      return failureCount < 2;
+    }
   });
 
-  if (isLoading) {
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast.success('Successfully signed out.');
+      navigate('/login');
+    } catch (error) {
+      console.error('Sign out error:', error);
+      toast.error('Error signing out. Please try again.');
+    }
+  };
+
+  // Show loading state
+  if (loading || (user && userRole === null)) {
     return (
       <div className="min-h-screen bg-background p-8">
         <div className="max-w-4xl mx-auto">
@@ -43,26 +82,17 @@ const AdminPage = () => {
               </Button>
             </Link>
             <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={async () => {
-                await supabase.auth.signOut();
-                navigate('/login');
-              }}
-            >
-              Logout
-            </Button>
           </div>
           <div className="text-center py-8">
-            <p className="text-muted-foreground">Loading messages...</p>
+            <p className="text-muted-foreground">Verifying admin access...</p>
           </div>
         </div>
       </div>
     );
   }
 
-  if (fetchError) {
+  // Show unauthorized if not admin
+  if (!user || userRole !== 'admin') {
     return (
       <div className="min-h-screen bg-background p-8">
         <div className="max-w-4xl mx-auto">
@@ -73,21 +103,14 @@ const AdminPage = () => {
                 Back to Home
               </Button>
             </Link>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={async () => {
-                await supabase.auth.signOut();
-                navigate('/login');
-              }}
-            >
-              Logout
-            </Button>
+            <h1 className="text-3xl font-bold">Access Denied</h1>
           </div>
-          <div className="text-center py-8">
-            <p className="text-red-500">Error loading messages: {(fetchError as Error).message}</p>
-          </div>
+          <Card>
+            <CardContent className="py-8 text-center">
+              <Shield className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+              <p className="text-muted-foreground">You don't have permission to access this page.</p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     );
@@ -104,23 +127,41 @@ const AdminPage = () => {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={async () => {
-              await supabase.auth.signOut();
-              navigate('/login');
-            }}
-          >
-            Logout
-          </Button>
+          <div className="ml-auto flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">
+              Welcome, {user.email}
+            </span>
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              Logout
+            </Button>
+          </div>
         </div>
 
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">Contact Messages ({messages?.length || 0})</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            Contact Messages ({messages?.length || 0})
+          </h2>
         </div>
 
-        {!messages || messages.length === 0 ? (
+        {messagesLoading ? (
+          <Card>
+            <CardContent className="py-8 text-center">
+              <p className="text-muted-foreground">Loading messages...</p>
+            </CardContent>
+          </Card>
+        ) : fetchError ? (
+          <Card>
+            <CardContent className="py-8 text-center">
+              <AlertTriangle className="h-12 w-12 mx-auto mb-4 text-red-500" />
+              <p className="text-red-500 mb-2">Error loading messages</p>
+              <p className="text-sm text-muted-foreground">
+                {fetchError.message === 'Unauthorized access' 
+                  ? 'You don\'t have permission to view messages.' 
+                  : 'Please try refreshing the page.'}
+              </p>
+            </CardContent>
+          </Card>
+        ) : !messages || messages.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center">
               <Mail className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
@@ -143,12 +184,14 @@ const AdminPage = () => {
                 <CardContent className="space-y-3">
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Mail className="h-4 w-4 mr-2" />
-                    {message.email}
+                    <a href={`mailto:${message.email}`} className="hover:underline">
+                      {message.email}
+                    </a>
                   </div>
                   {message.phone && (
                     <div className="flex items-center text-sm text-muted-foreground gap-2">
                       <Phone className="h-4 w-4" />
-                      {message.phone}
+                      <span>{message.phone}</span>
                       {/* WhatsApp */}
                       <a
                         href={`https://wa.me/${message.phone.replace(/\D/g, '')}`}
@@ -177,7 +220,9 @@ const AdminPage = () => {
                   )}
                   <div className="mt-4">
                     <p className="text-sm font-medium mb-2">Message:</p>
-                    <p className="text-sm bg-muted p-3 rounded-md">{message.message}</p>
+                    <p className="text-sm bg-muted p-3 rounded-md whitespace-pre-wrap">
+                      {message.message}
+                    </p>
                   </div>
                 </CardContent>
               </Card>

@@ -1,129 +1,176 @@
 
 import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "@/hooks/useTranslation";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { useContactForm } from "@/hooks/useContactForm";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Contact = () => {
-  const { t } = useTranslation();
-  const { formData, handleChange, handleSubmit, isSubmitting } = useContactForm();
+  const { currentLanguage, t } = useTranslation();
+  const { formData, errors, handleChange, handleSubmit, isSubmitting, hasErrors } = useContactForm();
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-header text-3xl md:text-4xl font-bold mb-4">
-            {t('contact_title')}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">
+            {t('contact.title')}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {t('contact_subtitle')}
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            {t('contact.subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="flex items-start space-x-4">
-              <div className="bg-primary/10 p-3 rounded-lg">
-                <MapPin className="h-6 w-6 text-primary" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Contact Information */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Phone className="h-5 w-5 text-primary" />
+                {t('contact.info')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-muted-foreground" />
+                <div>
+                  <p className="font-medium">+387 61 234 567</p>
+                  <p className="text-sm text-muted-foreground">
+                    {currentLanguage === 'bs' ? 'Pozovite nas' : 'Call us'}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">{t('contact_location_title')}</h3>
-                <p className="text-muted-foreground">Sarajevo, Bosnia and Herzegovina</p>
+              <div className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-muted-foreground" />
+                <div>
+                  <p className="font-medium">info@webfokus.ba</p>
+                  <p className="text-sm text-muted-foreground">
+                    {currentLanguage === 'bs' ? 'Pošaljite email' : 'Send email'}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-start space-x-4">
-              <div className="bg-primary/10 p-3 rounded-lg">
-                <Mail className="h-6 w-6 text-primary" />
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-muted-foreground" />
+                <div>
+                  <p className="font-medium">Sarajevo, BiH</p>
+                  <p className="text-sm text-muted-foreground">
+                    {currentLanguage === 'bs' ? 'Naša lokacija' : 'Our location'}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">{t('contact_email_title')}</h3>
-                <p className="text-muted-foreground">info@webfokus.ba</p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-4">
-              <div className="bg-primary/10 p-3 rounded-lg">
-                <Phone className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">{t('contact_phone_title')}</h3>
-                <p className="text-muted-foreground">+387 61 234 567</p>
-              </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
-                {t('contact_form_name')} *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
-              />
-            </div>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Send className="h-5 w-5 text-primary" />
+                {t('contact.form.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">{t('contact.form.name')} *</Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder={t('contact.form.namePlaceholder')}
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={errors.name ? 'border-red-500' : ''}
+                    disabled={isSubmitting}
+                    required
+                    maxLength={100}
+                  />
+                  {errors.name && (
+                    <p className="text-sm text-red-500">{errors.name}</p>
+                  )}
+                </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                {t('contact_form_email')} *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
-              />
-            </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">{t('contact.form.email')} *</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder={t('contact.form.emailPlaceholder')}
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={errors.email ? 'border-red-500' : ''}
+                    disabled={isSubmitting}
+                    required
+                    maxLength={254}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-red-500">{errors.email}</p>
+                  )}
+                </div>
 
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                {t('contact_form_phone')}
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
-              />
-            </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">{t('contact.form.phone')}</Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder={t('contact.form.phonePlaceholder')}
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={errors.phone ? 'border-red-500' : ''}
+                    disabled={isSubmitting}
+                    maxLength={20}
+                  />
+                  {errors.phone && (
+                    <p className="text-sm text-red-500">{errors.phone}</p>
+                  )}
+                </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
-                {t('contact_form_message')} *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-background resize-vertical"
-              />
-            </div>
+                <div className="space-y-2">
+                  <Label htmlFor="message">{t('contact.form.message')} *</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder={t('contact.form.messagePlaceholder')}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={`min-h-[120px] resize-none ${errors.message ? 'border-red-500' : ''}`}
+                    disabled={isSubmitting}
+                    required
+                    maxLength={2000}
+                  />
+                  <div className="flex justify-between items-center">
+                    {errors.message && (
+                      <p className="text-sm text-red-500">{errors.message}</p>
+                    )}
+                    <p className="text-xs text-muted-foreground ml-auto">
+                      {formData.message.length}/2000
+                    </p>
+                  </div>
+                </div>
 
-            <Button 
-              type="submit" 
-              disabled={isSubmitting}
-              className="w-full btn bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-            >
-              {isSubmitting ? t('admin_loading') : t('contact_form_submit')}
-            </Button>
-          </form>
+                <Button 
+                  type="submit" 
+                  className="w-full" 
+                  disabled={isSubmitting || hasErrors}
+                >
+                  <Send className="h-4 w-4 mr-2" />
+                  {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
+                </Button>
+
+                <p className="text-xs text-muted-foreground text-center">
+                  {currentLanguage === 'bs' 
+                    ? '* Obavezna polja. Vaše podatke koristimo samo za odgovor na vašu poruku.'
+                    : '* Required fields. We only use your data to respond to your message.'}
+                </p>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
