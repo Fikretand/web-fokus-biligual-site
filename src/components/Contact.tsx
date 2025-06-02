@@ -18,10 +18,10 @@ const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">
-            {t('contact.title')}
+            {t('contact_title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t('contact.subtitle')}
+            {t('contact_subtitle')}
           </p>
         </div>
 
@@ -31,7 +31,7 @@ const Contact = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Phone className="h-5 w-5 text-primary" />
-                {t('contact.info')}
+                {t('contact_info')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -70,18 +70,18 @@ const Contact = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Send className="h-5 w-5 text-primary" />
-                {t('contact.form.title')}
+                {t('contact_form_title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">{t('contact.form.name')} *</Label>
+                  <Label htmlFor="name">{t('contact_form_name')} *</Label>
                   <Input
                     id="name"
                     name="name"
                     type="text"
-                    placeholder={t('contact.form.namePlaceholder')}
+                    placeholder={t('contact_form_namePlaceholder')}
                     value={formData.name}
                     onChange={handleChange}
                     className={errors.name ? 'border-red-500' : ''}
@@ -95,12 +95,12 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">{t('contact.form.email')} *</Label>
+                  <Label htmlFor="email">{t('contact_form_email')} *</Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder={t('contact.form.emailPlaceholder')}
+                    placeholder={t('contact_form_emailPlaceholder')}
                     value={formData.email}
                     onChange={handleChange}
                     className={errors.email ? 'border-red-500' : ''}
@@ -114,12 +114,12 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">{t('contact.form.phone')}</Label>
+                  <Label htmlFor="phone">{t('contact_form_phone')}</Label>
                   <Input
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder={t('contact.form.phonePlaceholder')}
+                    placeholder={t('contact_form_phonePlaceholder')}
                     value={formData.phone}
                     onChange={handleChange}
                     className={errors.phone ? 'border-red-500' : ''}
@@ -132,11 +132,11 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">{t('contact.form.message')} *</Label>
+                  <Label htmlFor="message">{t('contact_form_message')} *</Label>
                   <Textarea
                     id="message"
                     name="message"
-                    placeholder={t('contact.form.messagePlaceholder')}
+                    placeholder={t('contact_form_messagePlaceholder')}
                     value={formData.message}
                     onChange={handleChange}
                     className={`min-h-[120px] resize-none ${errors.message ? 'border-red-500' : ''}`}
@@ -160,7 +160,7 @@ const Contact = () => {
                   disabled={isSubmitting || hasErrors}
                 >
                   <Send className="h-4 w-4 mr-2" />
-                  {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
+                  {isSubmitting ? t('contact_form_sending') : t('contact_form_send')}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
