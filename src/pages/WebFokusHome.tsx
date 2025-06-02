@@ -14,6 +14,13 @@ import { useTheme } from "@/hooks/useTheme";
 import { useSEO } from "@/hooks/useSEO";
 import { useTranslation } from "@/hooks/useTranslation";
 
+// Declare gtag function for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 const WebFokusHome = () => {
   const { initializeTheme } = useTheme();
   const { currentLanguage } = useTranslation();
@@ -46,13 +53,17 @@ const WebFokusHome = () => {
     initializeTheme();
   }, []);
 
-  // Track page view
+  // Track page view with proper error handling
   useEffect(() => {
-    if (typeof gtag !== 'undefined') {
-      gtag('config', 'GA_MEASUREMENT_ID', {
-        page_title: seoData.title,
-        page_location: window.location.href
-      });
+    if (typeof window !== 'undefined' && window.gtag) {
+      try {
+        window.gtag('config', 'GA_MEASUREMENT_ID', {
+          page_title: seoData.title,
+          page_location: window.location.href
+        });
+      } catch (error) {
+        console.warn('Google Analytics tracking failed:', error);
+      }
     }
   }, [currentLanguage, seoData.title]);
 
