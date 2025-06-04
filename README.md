@@ -72,7 +72,7 @@ php -S localhost:8000
 ```
 web-fokus/
 ├── index.html          # Main HTML file
-├── styles.css          # CSS styles and responsive design
+├── src/index.css          # CSS styles and responsive design
 ├── main.js             # JavaScript functionality
 ├── README.md           # This file
 └── img/                # Images folder (if needed)
