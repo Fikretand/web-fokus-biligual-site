@@ -25,3 +25,6 @@ dist-ssr
 .env
 
 public/sitemap.xml
+
+bun.lockb
+backend/dev.db
