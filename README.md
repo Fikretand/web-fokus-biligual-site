@@ -77,6 +77,20 @@ cp .env.example .env
 # edit .env and change the URL if needed
 ```
 
+### Backend Setup
+
+Run the backend locally with the following commands:
+
+```bash
+npm install
+npx prisma migrate dev --name init
+node backend/server.js
+```
+
+The migration will create a local SQLite database (e.g. `backend/dev.db`).
+This file is for development only and should never be tracked in version
+control.
+
 ## 📁 Project Structure
 
 ```
