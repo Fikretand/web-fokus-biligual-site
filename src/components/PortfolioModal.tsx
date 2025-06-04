@@ -29,7 +29,7 @@ const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose }) => 
         <div className="relative">
           <img
             src={project.image}
-            alt={project.title}
+            alt={`Screenshot of ${project.title}`}
             className="w-full h-64 object-cover rounded-t-lg"
             width={800}
             height={256}

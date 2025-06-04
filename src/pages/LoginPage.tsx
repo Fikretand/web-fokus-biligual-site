@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
+import { useSEO } from '@/hooks/useSEO';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -20,6 +22,31 @@ const LoginPage = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const { currentLanguage } = useTranslation();
+
+  useSEO({
+    title:
+      currentLanguage === 'bs'
+        ? 'Prijava u admin panel | Web Fokus'
+        : 'Admin Login | Web Fokus',
+    description:
+      currentLanguage === 'bs'
+        ? 'Pristupite administraciji sajta Web Fokus.'
+        : 'Sign in to manage the Web Fokus website.',
+    keywords: 'web fokus login,admin',
+    ogTitle:
+      currentLanguage === 'bs'
+        ? 'Prijava u admin panel | Web Fokus'
+        : 'Admin Login | Web Fokus',
+    ogDescription:
+      currentLanguage === 'bs'
+        ? 'Pristupite administraciji sajta Web Fokus.'
+        : 'Sign in to manage the Web Fokus website.',
+    ogImage: 'https://webfokus.ba/logo.png',
+    ogUrl: 'https://webfokus.ba/login',
+    canonical: 'https://webfokus.ba/login',
+    lang: currentLanguage
+  });
 
   useEffect(() => {
     if (!loading && user) {
@@ -98,14 +125,14 @@ const LoginPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <main className="min-h-screen flex items-center justify-center bg-background">
         <p className="text-muted-foreground">Loading...</p>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <main className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
         <div className="mb-6">
           <Link to="/">
@@ -194,7 +221,7 @@ const LoginPage = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </main>
   );
 };
 
