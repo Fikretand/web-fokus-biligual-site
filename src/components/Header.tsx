@@ -62,6 +62,8 @@ const Header = () => {
               alt="Web Fokus logo"
               className="h-16 w-auto" // visina 36px, širina automatska
               style={{ maxWidth: 100, maxHeight: 64 }} // maksimalna širina 100px, maksimalna visina 64px
+              width={100}
+              height={64}
             />
             <span className="text-2xl font-bold text-primary">Web Fokus</span>
           </div>

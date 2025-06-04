@@ -23,8 +23,11 @@ export const useContactForm = () => {
       fieldSchema.parse(value);
       setErrors(prev => ({ ...prev, [name]: undefined }));
       return true;
-    } catch (error: any) {
-      const errorMessage = error.errors?.[0]?.message || 'Invalid input';
+    } catch (error: unknown) {
+      const errorMessage =
+        error && typeof error === 'object' && 'errors' in error
+          ? (error as { errors?: { message?: string }[] }).errors?.[0]?.message || 'Invalid input'
+          : 'Invalid input';
       setErrors(prev => ({ ...prev, [name]: errorMessage }));
       return false;
     }
@@ -102,7 +105,7 @@ export const useContactForm = () => {
         message: ''
       });
       setErrors({});
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Unexpected error:', error);
       toast.error('Neočekivana greška. Molimo pokušajte ponovo.');
     } finally {
