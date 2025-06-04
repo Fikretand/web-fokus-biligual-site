@@ -8,6 +8,7 @@ import { Suspense, lazy } from "react";
 
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
+const PristiglePoruke = lazy(() => import("./pages/PristiglePoruke"));
 import { TranslationProvider } from "@/hooks/useTranslation";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
               <Route path="/" element={<WebFokusHome />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/admin" element={<AdminPage />} />
+              <Route path="/pristigleporuke" element={<PristiglePoruke />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

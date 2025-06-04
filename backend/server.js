@@ -47,6 +47,16 @@ app.post("/contact", async (req, res) => {
   }
 });
 
+app.get("/contact", async (req, res) => {
+  try {
+    const messages = await prisma.contactMessage.findMany();
+    res.json(messages);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch messages" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
