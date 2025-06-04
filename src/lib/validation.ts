@@ -43,3 +43,11 @@ export const createRateLimiter = (maxAttempts: number, windowMs: number) => {
   
   return (identifier: string): boolean => {
     const now = Date.now();
+      const times = attempts.get(identifier) || [];
+    // Remove old attempts
+    const recent = times.filter((t) => now - t < windowMs);
+    recent.push(now);
+    attempts.set(identifier, recent);
+    return recent.length <= maxAttempts;
+  };
+};

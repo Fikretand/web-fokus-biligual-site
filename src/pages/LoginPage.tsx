@@ -136,25 +136,21 @@ const LoginPage = () => {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="admin@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={errors.email ? 'border-red-500' : ''}
-                  disabled={isLoading}
-                  required
-                />
-                {errors.email && (
-                  <p className="text-sm text-red-500">{errors.email}</p>
-@@ -207,57 +182,53 @@ const LoginPage = () => {
-                </div>
-                {errors.password && (
-                  <p className="text-sm text-red-500">{errors.password}</p>
-                )}
-              </div>
+  <Label htmlFor="email">Email</Label>
+  <Input
+    id="email"
+    type="email"
+    placeholder="admin@example.com"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className={errors.email ? 'border-red-500' : ''}
+    disabled={isLoading}
+    required
+  />
+  {errors.email && (
+    <p className="text-sm text-red-500">{errors.email}</p>
+  )}
+</div>
 
               {isSignUp && (
                 <div className="space-y-2">
