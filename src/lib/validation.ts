@@ -1,4 +1,3 @@
-
 import { z } from 'zod';
 
 // Contact form validation schema
@@ -31,7 +30,6 @@ export type ContactFormData = z.infer<typeof contactFormSchema>;
 // Sanitization utility
 export const sanitizeInput = (input: string): string => {
   return input
-    .trim()
     .replace(/[<>]/g, '') // Remove potential HTML tags
     .replace(/javascript:/gi, '') // Remove javascript: protocol
     .replace(/on\w+=/gi, ''); // Remove event handlers
@@ -43,11 +41,17 @@ export const createRateLimiter = (maxAttempts: number, windowMs: number) => {
   
   return (identifier: string): boolean => {
     const now = Date.now();
-      const times = attempts.get(identifier) || [];
-    // Remove old attempts
-    const recent = times.filter((t) => now - t < windowMs);
-    recent.push(now);
-    attempts.set(identifier, recent);
-    return recent.length <= maxAttempts;
+    const userAttempts = attempts.get(identifier) || [];
+    
+    // Remove old attempts outside the window
+    const validAttempts = userAttempts.filter(time => now - time < windowMs);
+    
+    if (validAttempts.length >= maxAttempts) {
+      return false; // Rate limit exceeded
+    }
+    
+    validAttempts.push(now);
+    attempts.set(identifier, validAttempts);
+    return true;
   };
 };

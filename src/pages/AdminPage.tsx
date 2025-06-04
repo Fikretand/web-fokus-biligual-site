@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
-const API_URL = 'http://localhost:3001/users';
+const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 const AdminPage = () => {
   const navigate = useNavigate();

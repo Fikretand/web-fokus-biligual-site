@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { contactFormSchema, type ContactFormData, sanitizeInput, createRateLimiter } from '@/lib/validation';
 
-const API_URL = 'http://localhost:3001/users';
+const API_URL = `${import.meta.env.VITE_API_URL}/contact`;
 
 const rateLimiter = createRateLimiter(3, 5 * 60 * 1000);
 
@@ -34,14 +34,13 @@ export const useContactForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const sanitizedValue = sanitizeInput(value);
 
     setFormData(prev => ({
       ...prev,
-      [name]: sanitizedValue
+      [name]: value
     }));
 
-    validateField(name as keyof ContactFormData, sanitizedValue);
+    validateField(name as keyof ContactFormData, value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,16 +68,16 @@ export const useContactForm = () => {
       }
 
       const sanitizedData = {
-        name: sanitizeInput(validationResult.data.name),
-        email: validationResult.data.email,
-        phone: validationResult.data.phone ? sanitizeInput(validationResult.data.phone) : null,
-        message: sanitizeInput(validationResult.data.message)
+        name: sanitizeInput(validationResult.data.name).trim(),
+        email: validationResult.data.email.trim(),
+        phone: validationResult.data.phone ? sanitizeInput(validationResult.data.phone).trim() : null,
+        message: sanitizeInput(validationResult.data.message).trim()
       };
 
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: sanitizedData.email, password: sanitizedData.message })
+        body: JSON.stringify(sanitizedData)
       });
 
       if (!res.ok) {
