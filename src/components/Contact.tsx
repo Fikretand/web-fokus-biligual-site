@@ -11,7 +11,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const Contact = () => {
   const { currentLanguage, t } = useTranslation();
-  const { formData, errors, handleChange, handleSubmit, isSubmitting, hasErrors } = useContactForm();
+  const { formData, errors, handleChange, handleSubmit, isSubmitting, isFormValid } = useContactForm();
 
   return (
     <section id="contact" className="py-16 bg-muted/30">
@@ -95,7 +95,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">{t('contact_form_email')} *</Label>
+                  <Label htmlFor="email">{t('contact_form_email')}</Label>
                   <Input
                     id="email"
                     name="email"
@@ -105,7 +105,6 @@ const Contact = () => {
                     onChange={handleChange}
                     className={errors.email ? 'border-red-500' : ''}
                     disabled={isSubmitting}
-                    required
                     maxLength={254}
                   />
                   {errors.email && (
@@ -114,7 +113,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">{t('contact_form_phone')}</Label>
+                  <Label htmlFor="phone">{t('contact_form_phone')} *</Label>
                   <Input
                     id="phone"
                     name="phone"
@@ -124,6 +123,7 @@ const Contact = () => {
                     onChange={handleChange}
                     className={errors.phone ? 'border-red-500' : ''}
                     disabled={isSubmitting}
+                    required
                     maxLength={20}
                   />
                   {errors.phone && (
@@ -154,10 +154,10 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isSubmitting || hasErrors}
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting || !isFormValid}
                 >
                   <Send className="h-4 w-4 mr-2" />
                   {isSubmitting ? t('contact_form_sending') : t('contact_form_send')}
