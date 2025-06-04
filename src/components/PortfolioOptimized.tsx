@@ -104,7 +104,7 @@ const PortfolioOptimized = () => {
               <div className="relative overflow-hidden">
                 <img
                   src={project.image}
-                  alt={`${project.title} - ${currentLanguage === 'bs' ? 'Web Fokus portfolio projekat' : 'Web Fokus portfolio project'}`}
+                  alt={`Screenshot ${currentLanguage === 'bs' ? 'sajta' : 'of'} ${project.title}`}
                   className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                   width="400"

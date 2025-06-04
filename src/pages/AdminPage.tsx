@@ -6,12 +6,39 @@ import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
+import { useSEO } from '@/hooks/useSEO';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const API_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 const AdminPage = () => {
   const navigate = useNavigate();
   const { user, loading, signOut } = useAuth();
+  const { currentLanguage } = useTranslation();
+
+  useSEO({
+    title:
+      currentLanguage === 'bs'
+        ? 'Admin panel - Web Fokus'
+        : 'Admin Dashboard - Web Fokus',
+    description:
+      currentLanguage === 'bs'
+        ? 'Administracija korisnika i poruka na Web Fokus sajtu.'
+        : 'Administration area for managing users and messages on the Web Fokus site.',
+    keywords: 'web fokus admin,panel',
+    ogTitle:
+      currentLanguage === 'bs'
+        ? 'Admin panel - Web Fokus'
+        : 'Admin Dashboard - Web Fokus',
+    ogDescription:
+      currentLanguage === 'bs'
+        ? 'Administracija korisnika i poruka na Web Fokus sajtu.'
+        : 'Administration area for managing users and messages on the Web Fokus site.',
+    ogImage: 'https://webfokus.ba/logo.png',
+    ogUrl: 'https://webfokus.ba/admin',
+    canonical: 'https://webfokus.ba/admin',
+    lang: currentLanguage
+  });
 
   useEffect(() => {
     if (!loading && !user) {
@@ -37,9 +64,9 @@ const AdminPage = () => {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen bg-background p-8">
+      <main className="min-h-screen bg-background p-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
+          <header className="flex items-center gap-4 mb-8">
             <Link to="/">
               <Button variant="outline" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -47,19 +74,19 @@ const AdminPage = () => {
               </Button>
             </Link>
             <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          </div>
+          </header>
           <div className="text-center py-8">
             <p className="text-muted-foreground">Loading...</p>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <main className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
+        <header className="flex items-center gap-4 mb-8">
           <Link to="/">
             <Button variant="outline" size="sm">
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -72,11 +99,11 @@ const AdminPage = () => {
               Logout
             </Button>
           </div>
-        </div>
+        </header>
 
-        <div className="mb-6">
+        <section className="mb-6">
           <h2 className="text-xl font-semibold mb-4">Registered Users</h2>
-        </div>
+        </section>
 
         {isLoading ? (
           <Card>
@@ -108,7 +135,7 @@ const AdminPage = () => {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 };
 
