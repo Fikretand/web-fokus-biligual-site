@@ -1,4 +1,4 @@
-Datasource db {
+datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
@@ -11,4 +11,12 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
 }
