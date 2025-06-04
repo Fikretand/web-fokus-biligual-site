@@ -15,6 +15,7 @@ interface ContactMessage {
 }
 
 const API_URL = `${import.meta.env.VITE_API_URL}/contact`;
+const PORUKE_PASSWORD = import.meta.env.VITE_PORUKE_PASSWORD as string;
 
 const PristiglePoruke = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const PristiglePoruke = () => {
             <form
               onSubmit={e => {
                 e.preventDefault();
-                if (password === 'tajna123') {
+                if (password === PORUKE_PASSWORD) {
                   setAuthorized(true);
                   setError('');
                 } else {
