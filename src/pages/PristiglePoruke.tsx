@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 interface ContactMessage {
   id: number;
@@ -18,15 +20,8 @@ const PristiglePoruke = () => {
   const navigate = useNavigate();
   const [authorized, setAuthorized] = useState(false);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
-
-  useEffect(() => {
-    const pwd = window.prompt('Enter password');
-    if (pwd === 'tajna123') {
-      setAuthorized(true);
-    } else {
-      navigate('/');
-    }
-  }, [navigate]);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!authorized) return;
@@ -44,7 +39,39 @@ const PristiglePoruke = () => {
   }, [authorized]);
 
   if (!authorized) {
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Zaštićena stranica</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+                if (password === 'tajna123') {
+                  setAuthorized(true);
+                  setError('');
+                } else {
+                  setError('Pogrešna lozinka!');
+                }
+              }}
+              className="space-y-4"
+            >
+              <Input
+                type="password"
+                placeholder="Unesite lozinku"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+              <Button type="submit" className="w-full">Pristupi</Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   return (
@@ -89,4 +116,3 @@ const PristiglePoruke = () => {
 };
 
 export default PristiglePoruke;
-
