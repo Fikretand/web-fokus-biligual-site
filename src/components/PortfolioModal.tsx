@@ -31,6 +31,8 @@ const PortfolioModal: React.FC<PortfolioModalProps> = ({ project, onClose }) => 
             src={project.image}
             alt={project.title}
             className="w-full h-64 object-cover rounded-t-lg"
+            width={800}
+            height={256}
           />
           <Button
             variant="ghost"

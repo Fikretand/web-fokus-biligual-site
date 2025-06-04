@@ -16,8 +16,8 @@ export const contactFormSchema = z.object({
     .refine((val) => {
       if (!val) return true; // Optional field
       // Allow international phone formats
-      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-      const cleanPhone = val.replace(/[\s\-\(\)]/g, '');
+      const phoneRegex = /^\+?[1-9]\d{0,15}$/;
+      const cleanPhone = val.replace(/[\s-()]/g, '');
       return phoneRegex.test(cleanPhone) && cleanPhone.length >= 8 && cleanPhone.length <= 16;
     }, 'Please enter a valid phone number'),
   message: z.string()
