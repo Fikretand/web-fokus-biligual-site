@@ -91,6 +91,17 @@ The migration will create a local SQLite database (e.g. `backend/dev.db`).
 This file is for development only and should never be tracked in version
 control.
 
+### Admin Authentication
+
+1. Start Prisma Studio and create a test user:
+
+```bash
+npx prisma studio
+# Add a user with email: "admin@example.com" and password: "admin123"
+```
+
+2. Navigate to `/login` in the app and sign in with that account. On success you will be redirected to `/admin`.
+
 ## 📁 Project Structure
 
 ```

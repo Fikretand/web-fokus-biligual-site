@@ -69,8 +69,8 @@ export const useContactForm = () => {
 
       const sanitizedData = {
         name: sanitizeInput(validationResult.data.name).trim(),
-        email: validationResult.data.email.trim(),
-        phone: validationResult.data.phone ? sanitizeInput(validationResult.data.phone).trim() : null,
+        email: validationResult.data.email ? validationResult.data.email.trim() : '',
+        phone: sanitizeInput(validationResult.data.phone).trim(),
         message: sanitizeInput(validationResult.data.message).trim()
       };
 
@@ -101,12 +101,20 @@ export const useContactForm = () => {
     }
   };
 
+  const hasErrors = Object.values(errors).some(error => error !== undefined);
+  const isFormValid =
+    !hasErrors &&
+    formData.name.trim() !== '' &&
+    formData.phone.trim() !== '' &&
+    formData.message.trim() !== '';
+
   return {
     formData,
     errors,
     handleChange,
     handleSubmit,
     isSubmitting,
-    hasErrors: Object.values(errors).some(error => error !== undefined)
+    hasErrors,
+    isFormValid
   };
 };

@@ -23,7 +23,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate('/');
+      navigate('/admin');
     }
   }, [user, loading, navigate]);
 
@@ -73,7 +73,7 @@ const LoginPage = () => {
         const newUser = await res.json();
         localStorage.setItem('user', JSON.stringify(newUser));
         toast.success('Account created successfully!');
-        navigate('/');
+        navigate('/admin');
       } else {
         const res = await fetch(API_URL);
         const users: { id: number; email: string; password: string }[] = await res.json();
@@ -86,7 +86,7 @@ const LoginPage = () => {
         }
         localStorage.setItem('user', JSON.stringify(found));
         toast.success('Successfully signed in!');
-        navigate('/');
+        navigate('/admin');
       }
     } catch (error) {
       console.error('Auth error:', error);
