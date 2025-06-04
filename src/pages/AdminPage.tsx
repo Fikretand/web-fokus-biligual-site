@@ -9,6 +9,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AdminPage = () => {
   const navigate = useNavigate();
   const { user, userRole, loading, signOut } = useAuth();

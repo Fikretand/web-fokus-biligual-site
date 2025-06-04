@@ -67,6 +67,16 @@ php -S localhost:8000
 
 4. **Visit** `http://localhost:8000` in your browser
 
+### Environment Variables
+
+Create a `.env` file based on `.env.example` and set `VITE_API_URL` to the base
+URL of your backend API:
+
+```bash
+cp .env.example .env
+# edit .env and change the URL if needed
+```
+
 ## 📁 Project Structure
 
 ```
