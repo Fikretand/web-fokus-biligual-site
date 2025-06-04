@@ -6,19 +6,22 @@ export const contactFormSchema = z.object({
     .min(2, 'Name must be at least 2 characters')
     .max(100, 'Name must be less than 100 characters')
     .regex(/^[a-zA-ZšđčćžŠĐČĆŽ\s-']+$/, 'Name contains invalid characters'),
-  email: z.string()
-    .email('Please enter a valid email address')
-    .max(254, 'Email is too long')
-    .toLowerCase(),
-  phone: z.string()
-    .optional()
+  email: z.preprocess(
+    (val) => (typeof val === 'string' && val.trim() === '' ? undefined : val),
+    z
+      .string()
+      .email('Unesite važeću email adresu')
+      .max(254, 'Email je predugačak')
+      .toLowerCase()
+      .optional()
+  ),
+  phone: z
+    .string({ required_error: 'Telefon je obavezan' })
     .refine((val) => {
-      if (!val) return true; // Optional field
-      // Allow international phone formats
       const phoneRegex = /^\+?[1-9]\d{0,15}$/;
       const cleanPhone = val.replace(/[\s-()]/g, '');
       return phoneRegex.test(cleanPhone) && cleanPhone.length >= 8 && cleanPhone.length <= 16;
-    }, 'Please enter a valid phone number'),
+    }, 'Unesite ispravan broj telefona'),
   message: z.string()
     .min(10, 'Message must be at least 10 characters')
     .max(2000, 'Message must be less than 2000 characters')
