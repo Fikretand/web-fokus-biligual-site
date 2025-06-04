@@ -4,6 +4,8 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { contactFormSchema, type ContactFormData, sanitizeInput, createRateLimiter } from '@/lib/validation';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 // Rate limiter: max 3 submissions per 5 minutes per email
 const rateLimiter = createRateLimiter(3, 5 * 60 * 1000);
 
