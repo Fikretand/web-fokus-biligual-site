@@ -1,12 +1,9 @@
-
 import { useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { contactFormSchema, type ContactFormData, sanitizeInput, createRateLimiter } from '@/lib/validation';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'http://localhost:3001/users';
 
-// Rate limiter: max 3 submissions per 5 minutes per email
 const rateLimiter = createRateLimiter(3, 5 * 60 * 1000);
 
 export const useContactForm = () => {
@@ -38,13 +35,12 @@ export const useContactForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const sanitizedValue = sanitizeInput(value);
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: sanitizedValue
     }));
 
-    // Real-time validation
     validateField(name as keyof ContactFormData, sanitizedValue);
   };
 
@@ -53,15 +49,13 @@ export const useContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Client-side rate limiting
       if (!rateLimiter(formData.email)) {
         toast.error('Previše zahtjeva. Molimo sačekajte prije ponovnog slanja.');
         return;
       }
 
-      // Validate entire form
       const validationResult = contactFormSchema.safeParse(formData);
-      
+
       if (!validationResult.success) {
         const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
         validationResult.error.errors.forEach((error) => {
@@ -81,21 +75,14 @@ export const useContactForm = () => {
         message: sanitizeInput(validationResult.data.message)
       };
 
-      const { error } = await supabase
-        .from('messages')
-        .insert([sanitizedData]);
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: sanitizedData.email, password: sanitizedData.message })
+      });
 
-      if (error) {
-        console.error('Database error:', error);
-        
-        // User-friendly error messages
-        if (error.code === '23505') {
-          toast.error('Ova poruka je već poslana. Molimo sačekajte prije ponovnog slanja.');
-        } else if (error.code === 'PGRST301') {
-          toast.error('Greška u pristupanju bazi podataka. Molimo pokušajte ponovo.');
-        } else {
-          toast.error('Greška pri slanju poruke. Molimo kontaktirajte nas direktno.');
-        }
+      if (!res.ok) {
+        toast.error('Greška pri slanju poruke. Molimo pokušajte ponovo.');
         return;
       }
 

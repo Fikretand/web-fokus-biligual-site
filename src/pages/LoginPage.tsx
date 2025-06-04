@@ -1,17 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'http://localhost:3001/users';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +21,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
 
-  // Redirect if already authenticated
   useEffect(() => {
     if (!loading && user) {
       navigate('/');
@@ -56,7 +52,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -66,54 +62,31 @@ const LoginPage = () => {
 
     try {
       if (isSignUp) {
-        const redirectUrl = `${API_URL}/`;
-        
-        const { data, error } = await supabase.auth.signUp({
-          email: email.toLowerCase().trim(),
-          password,
-          options: {
-            emailRedirectTo: redirectUrl
-          }
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email.toLowerCase().trim(), password })
         });
-
-        if (error) {
-          if (error.message.includes('already registered')) {
-            setErrors({ email: 'This email is already registered. Try signing in instead.' });
-          } else if (error.message.includes('weak password')) {
-            setErrors({ password: 'Password is too weak. Please use a stronger password.' });
-          } else {
-            setErrors({ general: error.message });
-          }
-          return;
+        if (!res.ok) {
+          throw new Error('Failed to create account');
         }
-
-        if (data.user && !data.session) {
-          toast.success('Please check your email to confirm your account before signing in.');
-        } else if (data.session) {
-          toast.success('Account created successfully!');
-          navigate('/');
-        }
+        const newUser = await res.json();
+        localStorage.setItem('user', JSON.stringify(newUser));
+        toast.success('Account created successfully!');
+        navigate('/');
       } else {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: email.toLowerCase().trim(),
-          password
-        });
-
-        if (error) {
-          if (error.message.includes('Invalid login credentials')) {
-            setErrors({ general: 'Invalid email or password. Please try again.' });
-          } else if (error.message.includes('Email not confirmed')) {
-            setErrors({ general: 'Please check your email and confirm your account before signing in.' });
-          } else {
-            setErrors({ general: error.message });
-          }
+        const res = await fetch(API_URL);
+        const users: { id: number; email: string; password: string }[] = await res.json();
+        const found = users.find(
+          u => u.email === email.toLowerCase().trim() && u.password === password
+        );
+        if (!found) {
+          setErrors({ general: 'Invalid email or password. Please try again.' });
           return;
         }
-
-        if (data.session) {
-          toast.success('Successfully signed in!');
-          navigate('/');
-        }
+        localStorage.setItem('user', JSON.stringify(found));
+        toast.success('Successfully signed in!');
+        navigate('/');
       }
     } catch (error) {
       console.error('Auth error:', error);
@@ -149,8 +122,8 @@ const LoginPage = () => {
               {isSignUp ? 'Create Account' : 'Admin Login'}
             </CardTitle>
             <p className="text-sm text-muted-foreground text-center">
-              {isSignUp 
-                ? 'Create your admin account to access the dashboard' 
+              {isSignUp
+                ? 'Create your admin account to access the dashboard'
                 : 'Sign in to access the admin dashboard'}
             </p>
           </CardHeader>
@@ -176,36 +149,7 @@ const LoginPage = () => {
                 />
                 {errors.email && (
                   <p className="text-sm text-red-500">{errors.email}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className={errors.password ? 'border-red-500' : ''}
-                    disabled={isLoading}
-                    required
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                    disabled={isLoading}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
-                  </Button>
+@@ -207,57 +182,53 @@ const LoginPage = () => {
                 </div>
                 {errors.password && (
                   <p className="text-sm text-red-500">{errors.password}</p>
@@ -231,12 +175,8 @@ const LoginPage = () => {
                 </div>
               )}
 
-              <Button 
-                type="submit" 
-                className="w-full" 
-                disabled={isLoading}
-              >
-                {isLoading ? 'Please wait...' : (isSignUp ? 'Create Account' : 'Sign In')}
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? 'Please wait...' : isSignUp ? 'Create Account' : 'Sign In'}
               </Button>
 
               <div className="text-center">
@@ -249,8 +189,8 @@ const LoginPage = () => {
                   }}
                   disabled={isLoading}
                 >
-                  {isSignUp 
-                    ? 'Already have an account? Sign in' 
+                  {isSignUp
+                    ? 'Already have an account? Sign in'
                     : 'Need an account? Sign up'}
                 </Button>
               </div>

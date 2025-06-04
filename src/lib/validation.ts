@@ -43,17 +43,3 @@ export const createRateLimiter = (maxAttempts: number, windowMs: number) => {
   
   return (identifier: string): boolean => {
     const now = Date.now();
-    const userAttempts = attempts.get(identifier) || [];
-    
-    // Remove old attempts outside the window
-    const validAttempts = userAttempts.filter(time => now - time < windowMs);
-    
-    if (validAttempts.length >= maxAttempts) {
-      return false; // Rate limit exceeded
-    }
-    
-    validAttempts.push(now);
-    attempts.set(identifier, validAttempts);
-    return true;
-  };
-};

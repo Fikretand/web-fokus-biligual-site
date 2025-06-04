@@ -1,3 +1,6 @@
++1
+-0
+
 # Logs
 logs
 *.log
@@ -23,8 +26,3 @@ dist-ssr
 *.sln
 *.sw?
 .env
-
-public/sitemap.xml
-
-bun.lockb
-backend/dev.db
