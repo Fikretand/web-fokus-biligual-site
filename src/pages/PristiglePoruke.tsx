@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useSEO } from '@/hooks/useSEO';
 import { useTranslation } from '@/hooks/useTranslation';
+import { Trash2 } from "lucide-react"; // ili koristi <span>🗑️</span>
 
 interface ContactMessage {
   id: number;
@@ -121,15 +122,46 @@ const PristiglePoruke = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {messages.map((m) => (
-                    <TableRow key={m.id}>
-                      <TableCell>{m.name}</TableCell>
-                      <TableCell>{m.phone || '-'}</TableCell>
-                      <TableCell>{m.email || '-'}</TableCell>
-                      <TableCell className="max-w-xs whitespace-pre-wrap">{m.message}</TableCell>
-                      <TableCell>{new Date(m.createdAt).toLocaleString()}</TableCell>
-                    </TableRow>
-                  ))}
+                  {[...messages]
+                    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                    .map((m) => (
+                      <TableRow key={m.id}>
+                        <TableCell>{m.name}</TableCell>
+                        <TableCell>{m.phone || '-'}</TableCell>
+                        <TableCell>{m.email || '-'}</TableCell>
+                        <TableCell className="max-w-xs whitespace-pre-wrap">{m.message}</TableCell>
+                        <TableCell>{new Date(m.createdAt).toLocaleString()}</TableCell>
+                        <TableCell>
+                          <button
+                            onClick={async () => {
+                              if (
+                                window.confirm(
+                                  "Da li ste sigurni da želite obrisati ovu poruku?"
+                                )
+                              ) {
+                                try {
+                                  const res = await fetch(`${API_URL}/${m.id}`, {
+                                    method: "DELETE",
+                                    headers: { "x-admin-password": password },
+                                  });
+                                  if (res.ok) {
+                                    setMessages((msgs) => msgs.filter((msg) => msg.id !== m.id));
+                                  } else {
+                                    alert("Greška pri brisanju poruke.");
+                                  }
+                                } catch {
+                                  alert("Greška pri brisanju poruke.");
+                                }
+                              }
+                            }}
+                            title="Obriši poruku"
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             )}

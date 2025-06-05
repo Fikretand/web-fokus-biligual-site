@@ -66,6 +66,23 @@ app.get("/contact", async (req, res) => {
   }
 });
 
+app.delete("/contact/:id", async (req, res) => {
+  const password = req.headers["x-admin-password"];
+  if (password !== ADMIN_PASSWORD) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  try {
+    await prisma.contactMessage.delete({
+      where: { id: Number(req.params.id) }
+    });
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete message" });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
