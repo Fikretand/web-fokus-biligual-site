@@ -69,8 +69,10 @@ php -S localhost:8000
 
 ### Environment Variables
 
-Create a `.env` file based on `.env.example` and set `VITE_API_URL` to the base
-URL of your backend API:
+Create a `.env` file based on `.env.example` and set the variables:
+
+- `VITE_API_URL` - base URL of the backend API
+- `ADMIN_ACCESS_PASSWORD` - password for accessing `/pristigleporuke`
 
 ```bash
 cp .env.example .env
@@ -79,12 +81,12 @@ cp .env.example .env
 
 ### Backend Setup
 
-Run the backend locally with the following commands:
+Install dependencies and start the project in development mode:
 
 ```bash
 npm install
 npx prisma migrate dev --name init
-node backend/server.js
+npm run dev
 ```
 
 The migration will create a local SQLite database (e.g. `backend/dev.db`).
@@ -100,7 +102,7 @@ npx prisma studio
 # Add a user with email: "admin@example.com" and password: "admin123"
 ```
 
-2. Navigate to `/login` in the app and sign in with that account. On success you will be redirected to `/admin`.
+2. Navigate to `/pristigleporuke` and enter the admin password when prompted.
 
 ## 📁 Project Structure
 
