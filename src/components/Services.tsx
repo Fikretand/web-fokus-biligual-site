@@ -8,43 +8,43 @@ const Services = () => {
 
   const services = [
     {
-      icon: <Palette className="h-8 w-8 text-pink-500" />,
+      icon: <Palette className="h-8 w-8 text-purple-600" />,
       title: t('service_design_title'),
       description: t('service_design_desc'),
       details: t('service_design_details'), // Dodaj detalje u prevodima
     },
     {
-      icon: <Search className="h-8 w-8 text-blue-500" />,
+      icon: <Search className="h-8 w-8 text-purple-600" />,
       title: t('service_seo_title'),
       description: t('service_seo_desc'),
       details: t('service_seo_details'),
     },
     {
-      icon: <Globe className="h-8 w-8 text-green-500" />,
+      icon: <Globe className="h-8 w-8 text-purple-600" />,
       title: t('service_multilang_title'),
       description: t('service_multilang_desc'),
       details: t('service_multilang_details'),
     },
     {
-      icon: <Server className="h-8 w-8 text-purple-500" />,
+      icon: <Server className="h-8 w-8 text-purple-600" />,
       title: t('service_hosting_title'),
       description: t('service_hosting_desc'),
       details: t('service_hosting_details'),
     },
     {
-      icon: <Moon className="h-8 w-8 text-indigo-500" />,
+      icon: <Moon className="h-8 w-8 text-purple-600" />,
       title: t('service_themes_title'),
       description: t('service_themes_desc'),
       details: t('service_themes_details'),
     },
     {
-      icon: <Zap className="h-8 w-8 text-yellow-500" />,
+      icon: <Zap className="h-8 w-8 text-purple-600" />,
       title: t('service_speed_title'),
       description: t('service_speed_desc'),
       details: t('service_speed_details'),
     },
     {
-      icon: <Wrench className="h-8 w-8 text-gray-500" />,
+      icon: <Wrench className="h-8 w-8 text-purple-600" />,
       title: t('service_maintenance_title'),
       description: t('service_maintenance_desc'),
       details: t('service_maintenance_details'),

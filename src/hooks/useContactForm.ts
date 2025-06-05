@@ -14,6 +14,7 @@ export const useContactForm = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
   const validateField = (name: keyof ContactFormData, value: string) => {
@@ -86,6 +87,8 @@ export const useContactForm = () => {
       }
 
       toast.success('Poruka je uspješno poslana! Kontaktiraćemo vas uskoro.');
+      setSubmitSuccess(true);
+      setTimeout(() => setSubmitSuccess(false), 5000);
       setFormData({
         name: '',
         email: '',
@@ -115,6 +118,7 @@ export const useContactForm = () => {
     handleSubmit,
     isSubmitting,
     hasErrors,
-    isFormValid
+    isFormValid,
+    submitSuccess
   };
 };

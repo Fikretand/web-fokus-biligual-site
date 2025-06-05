@@ -25,14 +25,14 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center pt-20 bg-center bg-no-repeat bg-cover"
       style={{ backgroundImage: "url('/hero_image.webp')" }}
     >
-      {/* Stronger overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/60 dark:bg-black/70 backdrop-blur-sm pointer-events-none"></div>
+      {/* Subtle overlay for better image visibility */}
+      <div className="absolute inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm pointer-events-none"></div>
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-white drop-shadow-lg">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-white drop-shadow-lg leading-tight">
             {t('hero_title')}
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 dark:text-white/80 mb-8 max-w-2xl mx-auto drop-shadow">
+          <p className="text-xl md:text-2xl text-white/90 dark:text-white/80 mb-8 max-w-2xl mx-auto drop-shadow leading-relaxed">
             {currentLanguage === "bs" ? (
               <>
                 Vi se fokusirate na posao, mi na vaš web.
@@ -56,7 +56,7 @@ const Hero = () => {
               {t('hero_cta')}
             </Button>
             <Button
-              variant="outline"
+              variant="secondary"
               size="lg"
               onClick={scrollToPortfolio}
               className="btn bg-white/80 dark:bg-white/10 text-gray-900 dark:text-white font-semibold rounded-lg shadow-lg border border-gray-300 dark:border-white/20"
