@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
 
 const Footer = () => {
-  const { t, currentLanguage } = useTranslation();
+  const { t } = useTranslation();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -21,11 +21,6 @@ const Footer = () => {
             <h3 className="text-2xl font-bold text-primary mb-4">Web Fokus</h3>
             <p className="text-muted-foreground mb-4">
               {t('footer_tagline')}
-            </p>
-            <p className="text-muted-foreground mb-4">
-              {currentLanguage === 'bs'
-                ? 'Izrada web stranica sa jasnim ciljem – rast vašeg biznisa.'
-                : 'Web design with one clear goal – helping your business grow.'}
             </p>
           </div>
 
