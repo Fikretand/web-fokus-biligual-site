@@ -52,6 +52,8 @@ app.post("/contact", async (req, res) => {
 
 app.get("/contact", async (req, res) => {
   const password = req.headers["x-admin-password"];
+  console.log('Primljena lozinka:', password);
+  console.log('Lozinka iz env:', ADMIN_PASSWORD);
   if (password !== ADMIN_PASSWORD) {
     return res.status(401).json({ error: "Unauthorized" });
   }

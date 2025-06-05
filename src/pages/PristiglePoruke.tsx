@@ -64,6 +64,7 @@ const PristiglePoruke = () => {
                 e.preventDefault();
                 try {
                   const res = await fetch(API_URL, {
+                     method: 'GET',
                     headers: { 'x-admin-password': password }
                   });
                   if (res.status === 401) {
