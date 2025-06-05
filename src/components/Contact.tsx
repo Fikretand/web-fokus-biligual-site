@@ -11,16 +11,16 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const Contact = () => {
   const { currentLanguage, t } = useTranslation();
-  const { formData, errors, handleChange, handleSubmit, isSubmitting, isFormValid } = useContactForm();
+  const { formData, errors, handleChange, handleSubmit, isSubmitting, isFormValid, submitSuccess } = useContactForm();
 
   return (
-    <section id="contact" className="py-16 bg-muted/30">
+    <section id="contact" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">
             {t('contact_title')}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {t('contact_subtitle')}
           </p>
         </div>
@@ -75,7 +75,7 @@ const Contact = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
+                <div className={`space-y-3 ${errors.name ? 'bg-red-50 dark:bg-red-900/20 p-2 rounded-md' : ''}`}>
                   <Label htmlFor="name">{t('contact_form_name')} *</Label>
                   <Input
                     id="name"
@@ -94,7 +94,7 @@ const Contact = () => {
                   )}
                 </div>
 
-                <div className="space-y-2">
+                <div className={`space-y-3 ${errors.email ? 'bg-red-50 dark:bg-red-900/20 p-2 rounded-md' : ''}`}>
                   <Label htmlFor="email">{t('contact_form_email')}</Label>
                   <Input
                     id="email"
@@ -112,7 +112,7 @@ const Contact = () => {
                   )}
                 </div>
 
-                <div className="space-y-2">
+                <div className={`space-y-3 ${errors.phone ? 'bg-red-50 dark:bg-red-900/20 p-2 rounded-md' : ''}`}>
                   <Label htmlFor="phone">{t('contact_form_phone')} *</Label>
                   <Input
                     id="phone"
@@ -131,7 +131,7 @@ const Contact = () => {
                   )}
                 </div>
 
-                <div className="space-y-2">
+                <div className={`space-y-3 ${errors.message ? 'bg-red-50 dark:bg-red-900/20 p-2 rounded-md' : ''}`}>
                   <Label htmlFor="message">{t('contact_form_message')} *</Label>
                   <Textarea
                     id="message"
@@ -162,6 +162,14 @@ const Contact = () => {
                   <Send className="h-4 w-4 mr-2" />
                   {isSubmitting ? t('contact_form_sending') : t('contact_form_send')}
                 </Button>
+
+                {submitSuccess && (
+                  <p className="text-sm text-green-600 dark:text-green-400 text-center">
+                    {currentLanguage === 'bs'
+                      ? 'Poruka poslana! Javit ćemo se uskoro.'
+                      : 'Message sent! We will contact you soon.'}
+                  </p>
+                )}
 
                 <p className="text-xs text-muted-foreground text-center">
                   {currentLanguage === 'bs' 

@@ -53,7 +53,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-b border-border z-50">
+    <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-b border-border shadow-md z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -71,15 +71,19 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.key}
-                onClick={() => scrollToSection(item.key)}
-                className={`nav-link transition-colors hover:text-primary ${
+                href={`#${item.key}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.key);
+                }}
+                className={`nav-link py-2 transition-colors hover:text-primary ${
                   activeSection === item.key ? 'active-link text-primary' : ''
                 }`}
               >
                 {item.label}
-              </button>
+              </a>
             ))}
           </nav>
 
@@ -111,10 +115,14 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden"
+              className="md:hidden transition-transform"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {isMenuOpen ? (
+                <X className="h-4 w-4 transform rotate-90 transition-transform" />
+              ) : (
+                <Menu className="h-4 w-4 transition-transform" />
+              )}
             </Button>
           </div>
         </div>
@@ -124,15 +132,19 @@ const Header = () => {
           <nav className="nav-menu md:hidden mt-4 pb-4 border-t border-border">
             <div className="flex flex-col space-y-4 pt-4">
               {navItems.map((item) => (
-                <button
+                <a
                   key={item.key}
-                  onClick={() => scrollToSection(item.key)}
-                  className={`nav-link text-left transition-colors hover:text-primary ${
+                  href={`#${item.key}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.key);
+                  }}
+                  className={`nav-link text-left py-2 transition-colors hover:text-primary ${
                     activeSection === item.key ? 'active-link text-primary' : ''
                   }`}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
             </div>
           </nav>
