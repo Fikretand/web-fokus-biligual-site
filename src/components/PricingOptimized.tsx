@@ -10,73 +10,85 @@ const PricingOptimized = () => {
   const plans = [
     {
       id: 'basic',
-      name: currentLanguage === 'bs' ? 'Osnovni paket' : 'Basic Plan',
+      name: currentLanguage === 'bs' ? 'Osnovni' : 'Basic',
       price: '250',
-      description: currentLanguage === 'bs'
-        ? 'Savršen za mali biznis koji tek kreće online'
+      description: currentLanguage === 'bs' 
+        ? 'Savršen za mala preduzeća koja tek počinju'
         : 'Perfect for small businesses just getting started',
       icon: <Star className="h-6 w-6" />,
-      features: currentLanguage === 'bs'
-        ? [
-            'Do 3 stranice',
-            'Bez kontakt forme',
-            'Responsive dizajn',
-            'SEO osnovna optimizacija'
-          ]
-        : [
-            'Up to 3 pages',
-            'No contact form',
-            'Responsive design',
-            'Basic SEO'
-          ],
+      features: currentLanguage === 'bs' ? [
+        'Do 5 stranica',
+        'Responzivan dizajn',
+        'Kontakt forma',
+        'Google Maps integracija',
+        'SSL sertifikat',
+        '1 godina hosting'
+      ] : [
+        'Up to 5 pages',
+        'Responsive design',
+        'Contact form',
+        'Google Maps integration',
+        'SSL certificate',
+        '1 year hosting'
+      ],
       popular: false
     },
     {
       id: 'pro',
-      name: currentLanguage === 'bs' ? 'Profesionalni paket' : 'Professional Plan',
+      name: currentLanguage === 'bs' ? 'Profesionalni' : 'Professional',
       price: '450',
       description: currentLanguage === 'bs'
-        ? 'Idealan za rastući biznis kojem treba više funkcionalnosti'
-        : 'Ideal for growing businesses needing more features',
+        ? 'Idealan za rastući biznis sa više funkcionalnosti'
+        : 'Ideal for growing businesses with more functionality',
       icon: <Zap className="h-6 w-6" />,
-      features: currentLanguage === 'bs'
-        ? [
-            'Sve iz Osnovnog paketa',
-            'Do 7 stranica',
-            'Kontakt forma',
-            'Galerija slika',
-            'Dvojezičnost'
-          ]
-        : [
-            'Includes everything from Basic Plan',
-            'Up to 7 pages',
-            'Contact form',
-            'Image gallery',
-            'Multilingual support'
-          ],
+      features: currentLanguage === 'bs' ? [
+        'Do 15 stranica',
+        'Responzivan dizajn',
+        'CMS sistem',
+        'SEO optimizacija',
+        'Google Analytics',
+        'Email marketing integracija',
+        'Chat podrška',
+        '1 godina hosting + domena'
+      ] : [
+        'Up to 15 pages',
+        'Responsive design',
+        'CMS system',
+        'SEO optimization',
+        'Google Analytics',
+        'Email marketing integration',
+        'Chat support',
+        '1 year hosting + domain'
+      ],
       popular: true
     },
     {
       id: 'premium',
-      name: currentLanguage === 'bs' ? 'Premium paket' : 'Premium Plan',
+      name: currentLanguage === 'bs' ? 'Premium' : 'Premium',
       price: '750',
       description: currentLanguage === 'bs'
         ? 'Kompletno rješenje za ozbiljan online biznis'
         : 'Complete solution for serious online business',
       icon: <Crown className="h-6 w-6" />,
-      features: currentLanguage === 'bs'
-        ? [
-            'Sve iz Profesionalnog paketa',
-            'Hosting i domena 1 godina',
-            'Prioritetna podrška',
-            'Izmjene do 30 dana'
-          ]
-        : [
-            'Includes everything from Professional Plan',
-            '1 year domain & hosting',
-            'Priority support',
-            'Revisions up to 30 days'
-          ],
+      features: currentLanguage === 'bs' ? [
+        'Neograničeno stranica',
+        'E-commerce funkcionalnost',
+        'Napredna SEO optimizacija',
+        'Analitika i izvještaji',
+        'Rezervacije online',
+        'Višejezična podrška',
+        'Premium podrška 24/7',
+        '2 godine hosting + domena'
+      ] : [
+        'Unlimited pages',
+        'E-commerce functionality',
+        'Advanced SEO optimization',
+        'Analytics and reports',
+        'Online booking system',
+        'Multi-language support',
+        'Premium 24/7 support',
+        '2 years hosting + domain'
+      ],
       popular: false
     }
   ];
@@ -170,12 +182,7 @@ const PricingOptimized = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12 space-y-2">
-          <p className="font-semibold">
-            {currentLanguage === 'bs'
-              ? 'Akcijske cijene! Važe do 30.06.'
-              : 'Promo prices! Valid until June 30th.'}
-          </p>
+        <div className="text-center mt-12">
           <p className="text-muted-foreground">
             {currentLanguage === 'bs'
               ? 'Trebate nešto specifično? Kontaktirajte nas za prilagođenu ponudu.'
