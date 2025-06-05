@@ -8,46 +8,52 @@ const Services = () => {
 
   const services = [
     {
-      icon: <Palette className="h-8 w-8 text-purple-600" />,
-      title: t('service_design_title'),
-      description: t('service_design_desc'),
-      details: t('service_design_details'), // Dodaj detalje u prevodima
+      icon: <Zap className="h-8 w-8 text-purple-600" />,
+      title: currentLanguage === 'bs' ? 'Brza izrada' : 'Fast delivery',
+      description:
+        currentLanguage === 'bs'
+          ? 'Vaš sajt je online za samo nekoliko dana bez kompromisa na kvalitetu.'
+          : 'Your site goes live in just a few days with no compromise on quality.',
+      details:
+        currentLanguage === 'bs'
+          ? 'Vaš sajt je online za samo nekoliko dana bez kompromisa na kvalitetu.'
+          : 'Your site goes live in just a few days with no compromise on quality.'
     },
     {
       icon: <Search className="h-8 w-8 text-purple-600" />,
-      title: t('service_seo_title'),
-      description: t('service_seo_desc'),
-      details: t('service_seo_details'),
+      title: currentLanguage === 'bs' ? 'SEO optimizacija' : 'SEO optimization',
+      description:
+        currentLanguage === 'bs'
+          ? 'Osnovna SEO podešavanja pomažu da budete primijećeni na Googleu i dođete do više klijenata.'
+          : 'Basic SEO settings help you get noticed on Google and reach more clients.',
+      details:
+        currentLanguage === 'bs'
+          ? 'Osnovna SEO podešavanja pomažu da budete primijećeni na Googleu i dođete do više klijenata.'
+          : 'Basic SEO settings help you get noticed on Google and reach more clients.'
     },
     {
       icon: <Globe className="h-8 w-8 text-purple-600" />,
-      title: t('service_multilang_title'),
-      description: t('service_multilang_desc'),
-      details: t('service_multilang_details'),
-    },
-    {
-      icon: <Server className="h-8 w-8 text-purple-600" />,
-      title: t('service_hosting_title'),
-      description: t('service_hosting_desc'),
-      details: t('service_hosting_details'),
-    },
-    {
-      icon: <Moon className="h-8 w-8 text-purple-600" />,
-      title: t('service_themes_title'),
-      description: t('service_themes_desc'),
-      details: t('service_themes_details'),
-    },
-    {
-      icon: <Zap className="h-8 w-8 text-purple-600" />,
-      title: t('service_speed_title'),
-      description: t('service_speed_desc'),
-      details: t('service_speed_details'),
+      title: currentLanguage === 'bs' ? 'Dvojezični sadržaj' : 'Bilingual content',
+      description:
+        currentLanguage === 'bs'
+          ? 'Bosanski i engleski jezik uključeni standardno kako biste dosegli širu publiku.'
+          : 'Bosnian and English included as standard so you can reach a wider audience.',
+      details:
+        currentLanguage === 'bs'
+          ? 'Bosanski i engleski jezik uključeni standardno kako biste dosegli širu publiku.'
+          : 'Bosnian and English included as standard so you can reach a wider audience.'
     },
     {
       icon: <Wrench className="h-8 w-8 text-purple-600" />,
-      title: t('service_maintenance_title'),
-      description: t('service_maintenance_desc'),
-      details: t('service_maintenance_details'),
+      title: currentLanguage === 'bs' ? 'Podrška i održavanje' : 'Support & maintenance',
+      description:
+        currentLanguage === 'bs'
+          ? 'Nudimo pomoć i manje izmjene i nakon isporuke kako bi vaš sajt ostao ažuran.'
+          : 'We provide help and minor changes after delivery so your site stays up to date.',
+      details:
+        currentLanguage === 'bs'
+          ? 'Nudimo pomoć i manje izmjene i nakon isporuke kako bi vaš sajt ostao ažuran.'
+          : 'We provide help and minor changes after delivery so your site stays up to date.'
     }
   ];
 

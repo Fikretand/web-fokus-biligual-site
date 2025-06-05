@@ -73,9 +73,9 @@ const PortfolioOptimized = () => {
             {t('portfolio_title') || (currentLanguage === 'bs' ? 'Naši Projekti' : 'Our Projects')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {currentLanguage === 'bs' 
-              ? 'Pogledajte neke od naših najuspješnijih web projekata'
-              : 'Check out some of our most successful web projects'}
+            {currentLanguage === 'bs'
+              ? 'Pogledajte primjere naših projekata i uvjerite se u kvalitetu'
+              : 'See examples of our work and explore our quality'}
           </p>
         </div>
 

@@ -3,28 +3,52 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { MessageCircle, Palette, Code, Rocket } from "lucide-react";
 
 const Process = () => {
-  const { t } = useTranslation();
+  const { currentLanguage, t } = useTranslation();
 
   const steps = [
     {
-      icon: <MessageCircle className="h-8 w-8 text-blue-500" />, // Plava
-      title: t('process_step1_title'),
-      description: t('process_step1_desc')
+      icon: <MessageCircle className="h-8 w-8 text-blue-500" />,
+      title:
+        currentLanguage === 'bs'
+          ? 'Korak 1: Kontaktirajte nas'
+          : 'Step 1: Get in touch',
+      description:
+        currentLanguage === 'bs'
+          ? 'Pošaljite nam osnovne informacije i brzo odgovaramo na sve upite.'
+          : 'Send us your basic info and we will reply quickly to all inquiries.'
     },
     {
-      icon: <Palette className="h-8 w-8 text-pink-500" />, // Roza
-      title: t('process_step2_title'),
-      description: t('process_step2_desc')
+      icon: <Palette className="h-8 w-8 text-pink-500" />,
+      title:
+        currentLanguage === 'bs'
+          ? 'Korak 2: Dogovor dizajna'
+          : 'Step 2: Plan the design',
+      description:
+        currentLanguage === 'bs'
+          ? 'Zajedno određujemo izgled i funkcionalnosti koje želite na sajtu.'
+          : 'Together we define the look and features you want on the site.'
     },
     {
-      icon: <Code className="h-8 w-8 text-purple-500" />, // Ljubičasta
-      title: t('process_step3_title'),
-      description: t('process_step3_desc')
+      icon: <Code className="h-8 w-8 text-purple-500" />,
+      title:
+        currentLanguage === 'bs'
+          ? 'Korak 3: Izrada'
+          : 'Step 3: Development',
+      description:
+        currentLanguage === 'bs'
+          ? 'Izrađujemo stranicu modernim alatima i prilagođavamo je svim uređajima.'
+          : 'We build the site with modern tools and optimize it for all devices.'
     },
     {
-      icon: <Rocket className="h-8 w-8 text-green-500" />, // Zelena
-      title: t('process_step4_title'),
-      description: t('process_step4_desc')
+      icon: <Rocket className="h-8 w-8 text-green-500" />,
+      title:
+        currentLanguage === 'bs'
+          ? 'Korak 4: Isporuka i podrška'
+          : 'Step 4: Delivery & support',
+      description:
+        currentLanguage === 'bs'
+          ? 'Dobijate gotov sajt uz kratko uputstvo i dostupnu podršku za pitanja.'
+          : 'You receive the finished site with a quick guide and ongoing support.'
     }
   ];
 

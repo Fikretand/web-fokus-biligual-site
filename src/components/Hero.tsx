@@ -30,20 +30,22 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-white drop-shadow-lg leading-tight">
-            {t('hero_title')}
+            {currentLanguage === 'bs'
+              ? 'Profesionalna izrada web stranica za rast poslovanja'
+              : 'Professional website design to grow your business'}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 dark:text-white/80 mb-8 max-w-2xl mx-auto drop-shadow leading-relaxed">
-            {currentLanguage === "bs" ? (
+            {currentLanguage === 'bs' ? (
               <>
-                Vi se fokusirate na posao, mi na vaš web.
+                Posvetite se svom poslu, a nama prepustite izradu web stranica.
                 <br className="hidden md:inline" />
-                Moderna, responzivna web rješenja već od 250 KM.
+                Moderna i responzivna rješenja po pristupačnim cijenama.
               </>
             ) : (
               <>
-                You focus on business, we focus on your web.
+                Focus on your business and let us handle website development.
                 <br className="hidden md:inline" />
-                Modern, responsive web solutions from 250 KM.
+                Modern, responsive solutions at affordable prices.
               </>
             )}
           </p>
@@ -53,7 +55,7 @@ const Hero = () => {
               onClick={scrollToContact}
               className="btn bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg shadow-lg"
             >
-              {t('hero_cta')}
+              {currentLanguage === 'bs' ? 'Zatraži ponudu' : 'Get a quote'}
             </Button>
             <Button
               variant="secondary"
@@ -61,7 +63,7 @@ const Hero = () => {
               onClick={scrollToPortfolio}
               className="btn bg-white/80 dark:bg-white/10 text-gray-900 dark:text-white font-semibold rounded-lg shadow-lg border border-gray-300 dark:border-white/20"
             >
-              {t('hero_portfolio')}
+              {currentLanguage === 'bs' ? 'Pogledaj primjere' : 'See examples'}
             </Button>
           </div>
         </div>
