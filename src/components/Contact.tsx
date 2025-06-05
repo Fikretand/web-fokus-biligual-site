@@ -67,14 +67,19 @@ const Contact = () => {
 
           {/* Contact Form */}
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Send className="h-5 w-5 text-primary" />
-                {t('contact_form_title')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Send className="h-5 w-5 text-primary" />
+              {t('contact_form_title')}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-4">
+              {currentLanguage === 'bs'
+                ? 'Imaš ideju? Pošalji poruku i javi nam se!'
+                : 'Have an idea? Send us a message!'}
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-4">
                 <div className={`space-y-3 ${errors.name ? 'bg-red-50 dark:bg-red-900/20 p-2 rounded-md' : ''}`}>
                   <Label htmlFor="name">{t('contact_form_name')} *</Label>
                   <Input
