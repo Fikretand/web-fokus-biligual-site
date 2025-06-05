@@ -3,7 +3,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Palette, Search, Globe, Server, Moon, Zap, Wrench } from "lucide-react";
 
 const Services = () => {
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const [selectedService, setSelectedService] = useState<number | null>(null);
 
   const services = [
