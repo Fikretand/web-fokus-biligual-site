@@ -8,6 +8,8 @@ Sitemap: https://webfokus.ba/sitemap.xml
 # Block unnecessary crawling
 Disallow: /admin
 Disallow: /login
+Disallow: /signup
+Disallow: /pristigleporuke
 Disallow: /_*
 Disallow: /api/
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -17,7 +17,6 @@ interface ContactMessage {
 }
 
 const API_URL = `${import.meta.env.VITE_API_URL}/contact`;
-const PORUKE_PASSWORD = import.meta.env.VITE_PORUKE_PASSWORD as string;
 
 const PristiglePoruke = () => {
   const navigate = useNavigate();
@@ -51,20 +50,6 @@ const PristiglePoruke = () => {
     lang: currentLanguage
   });
 
-  useEffect(() => {
-    if (!authorized) return;
-    const fetchMessages = async () => {
-      try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error('Failed to fetch');
-        const data = await res.json();
-        setMessages(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchMessages();
-  }, [authorized]);
 
   if (!authorized) {
     return (
@@ -75,13 +60,24 @@ const PristiglePoruke = () => {
           </CardHeader>
           <CardContent>
             <form
-              onSubmit={e => {
+              onSubmit={async e => {
                 e.preventDefault();
-                if (password === PORUKE_PASSWORD) {
+                try {
+                  const res = await fetch(API_URL, {
+                    headers: { 'x-admin-password': password }
+                  });
+                  if (res.status === 401) {
+                    setError('Pogrešna lozinka!');
+                    return;
+                  }
+                  if (!res.ok) throw new Error('Failed to fetch');
+                  const data = await res.json();
+                  setMessages(data);
                   setAuthorized(true);
                   setError('');
-                } else {
-                  setError('Pogrešna lozinka!');
+                } catch (err) {
+                  console.error(err);
+                  setError('Greška pri dohvatu poruka');
                 }
               }}
               className="space-y-4"

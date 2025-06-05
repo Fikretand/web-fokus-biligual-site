@@ -43,7 +43,7 @@ const AdminPage = () => {
   useEffect(() => {
     if (!loading && !user) {
       toast.error('Please log in to access the admin panel.');
-      navigate('/login');
+      navigate('/');
     }
   }, [user, loading, navigate]);
 
@@ -59,7 +59,7 @@ const AdminPage = () => {
 
   const handleSignOut = () => {
     signOut();
-    navigate('/login');
+    navigate('/');
   };
 
   if (loading || !user) {

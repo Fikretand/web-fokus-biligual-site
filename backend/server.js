@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const compression = require("compression");
 const { PrismaClient } = require("@prisma/client");
 const dotenv = require("dotenv");
 
@@ -8,9 +9,11 @@ dotenv.config();
 const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3001;
+const ADMIN_PASSWORD = process.env.ADMIN_ACCESS_PASSWORD;
 
 app.use(cors());
 app.use(express.json());
+app.use(compression());
 
 app.get("/users", async (req, res) => {
   try {
@@ -48,6 +51,10 @@ app.post("/contact", async (req, res) => {
 });
 
 app.get("/contact", async (req, res) => {
+  const password = req.headers["x-admin-password"];
+  if (password !== ADMIN_PASSWORD) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
   try {
     const messages = await prisma.contactMessage.findMany();
     res.json(messages);

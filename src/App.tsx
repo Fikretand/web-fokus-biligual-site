@@ -7,7 +7,6 @@ import WebFokusHome from "./pages/WebFokusHome";
 import { Suspense, lazy } from "react";
 
 const AdminPage = lazy(() => import("./pages/AdminPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
 const PristiglePoruke = lazy(() => import("./pages/PristiglePoruke"));
 import { TranslationProvider } from "@/hooks/useTranslation";
 
@@ -23,7 +22,6 @@ const App = () => (
           <Suspense fallback={<div className="p-6 text-center">Loading...</div>}>
             <Routes>
               <Route path="/" element={<WebFokusHome />} />
-              <Route path="/login" element={<LoginPage />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/pristigleporuke" element={<PristiglePoruke />} />
             </Routes>
