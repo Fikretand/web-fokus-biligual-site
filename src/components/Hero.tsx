@@ -33,19 +33,7 @@ const Hero = () => {
             {t('hero_title')}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 dark:text-white/80 mb-8 max-w-2xl mx-auto drop-shadow leading-relaxed">
-            {currentLanguage === "bs" ? (
-              <>
-                Vi se fokusirate na posao, mi na vaš web.
-                <br className="hidden md:inline" />
-                Moderna, responzivna web rješenja već od 250 KM.
-              </>
-            ) : (
-              <>
-                You focus on business, we focus on your web.
-                <br className="hidden md:inline" />
-                Modern, responsive web solutions from 250 KM.
-              </>
-            )}
+            {t('hero_subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
