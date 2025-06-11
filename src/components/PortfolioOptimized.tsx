@@ -47,7 +47,7 @@ const PortfolioOptimized = () => {
       image: '/portfolio/salon.webp',
       technologies: ['React', 'CSS3', 'JavaScript', 'Node.js'],
       category: 'business',
-      url: 'hhttps://atelierrosa.netlify.app/',
+      url: 'https://atelierrosa.netlify.app/',
       features: currentLanguage === 'bs'
         ? ['Galerija radova', 'Cenik usluga', 'Lokacija', 'Mobilna optimizacija']
         : ['Work gallery', 'Service pricing', 'Location', 'Mobile optimization']
