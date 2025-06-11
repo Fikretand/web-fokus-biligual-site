@@ -51,21 +51,19 @@ A modern, bilingual (Bosnian/English) portfolio website for Web Fokus - a web de
 ### Installation
 
 1. **Clone or download** this repository
-2. **Open `index.html`** in your web browser, or
-3. **Serve locally** using a web server:
+2. **Install dependencies**
 
 ```bash
-# Using Python 3
-python -m http.server 8000
-
-# Using Node.js (with live-server)
-npx live-server
-
-# Using PHP
-php -S localhost:8000
+npm install
 ```
 
-4. **Visit** `http://localhost:8000` in your browser
+3. **Start the development server**
+
+```bash
+npm run dev
+```
+
+4. **Visit** `http://localhost:5173` in your browser
 
 ### Environment Variables
 
