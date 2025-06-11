@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
+const rateLimit = require("express-rate-limit");
 const { PrismaClient } = require("@prisma/client");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
@@ -12,6 +13,14 @@ const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3001;
 const ADMIN_PASSWORD = process.env.ADMIN_ACCESS_PASSWORD;
+
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many requests, please try again later." },
+});
 
 app.use(cors());
 app.use(express.json());
@@ -49,7 +58,7 @@ app.post("/users", async (req, res) => {
   }
 });
 
-app.post("/contact", async (req, res) => {
+app.post("/contact", contactLimiter, async (req, res) => {
   const { name, email, phone, message } = req.body;
   try {
     const parsed = contactFormSchema.safeParse({ name, email, phone, message });
