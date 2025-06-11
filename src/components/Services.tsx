@@ -1,10 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
-import { Palette, Search, Globe, Server, Moon, Zap, Wrench } from "lucide-react";
+import {
+  Palette,
+  Search,
+  Globe,
+  Server,
+  Moon,
+  Zap,
+  Wrench,
+  Code,
+  MessageCircle,
+} from "lucide-react";
 
 const Services = () => {
   const { t, currentLanguage } = useTranslation();
   const [selectedService, setSelectedService] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffsetY(-rect.top);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const services = [
     {
@@ -52,7 +77,25 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-background">
+    <section
+      id="services"
+      ref={sectionRef}
+      className="relative py-20 bg-background overflow-hidden"
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <Code
+          className="absolute left-8 top-16 w-48 h-48 text-purple-500/20"
+          style={{ transform: `translateY(${offsetY * 0.2}px)` }}
+        />
+        <Globe
+          className="absolute right-10 top-0 w-56 h-56 text-purple-500/20"
+          style={{ transform: `translateY(${offsetY * 0.1}px)` }}
+        />
+        <MessageCircle
+          className="absolute left-1/2 bottom-0 w-40 h-40 text-purple-500/20"
+          style={{ transform: `translate(-50%, ${offsetY * -0.15}px)` }}
+        />
+      </div>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="section-header text-3xl md:text-4xl font-bold mb-4">
