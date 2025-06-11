@@ -60,6 +60,7 @@ app.post("/contact", async (req, res) => {
     const sanitizedData = {
       name: sanitizeInput(parsed.data.name).trim(),
       email: parsed.data.email ? parsed.data.email.trim() : "",
+      phone: sanitizeInput(parsed.data.phone).trim(),
       message: sanitizeInput(parsed.data.message).trim(),
     };
 

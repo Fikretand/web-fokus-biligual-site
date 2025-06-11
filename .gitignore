@@ -27,3 +27,4 @@ dist-ssr
 *.sw?
 .env
 backend/prisma/dev.db
+backend/prisma/dev.db-journal

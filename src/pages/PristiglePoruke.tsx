@@ -12,7 +12,7 @@ interface ContactMessage {
   id: number;
   name: string;
   email: string | null;
-  phone?: string | null;
+  phone: string;
   message: string;
   createdAt: string;
 }
