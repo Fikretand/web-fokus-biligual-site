@@ -73,6 +73,7 @@ Create a `.env` file based on `.env.example` and set the variables:
 
 - `VITE_API_URL` - base URL of the backend API
 - `ADMIN_ACCESS_PASSWORD` - password for accessing `/pristigleporuke`
+- `PRODUCTION_DOMAIN` - domain allowed by the backend CORS policy
 
 ```bash
 cp .env.example .env
