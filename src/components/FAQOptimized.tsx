@@ -10,19 +10,19 @@ const FAQOptimized = () => {
   const faqs = currentLanguage === 'bs' ? [
     {
       question: "Koliko vrijeme treba za izradu web sajta?",
-      answer: "Osnovni sajt izradimo za 7-14 dana, dok kompleksniji projekti mogu potrajati 3-6 sedmica. Sve ovisi o složenosti funkcionalnosti i broju stranica."
+      answer: "Osnovni sajt izradimo za 5-10 dana, dok kompleksniji projekti mogu potrajati 2-5 sedmica. Sve ovisi o složenosti, funkcionalnosti i broju stranica."
     },
     {
       question: "Da li je hosting i domena uključena u cijenu?",
-      answer: "Da! U sve naše pakete uključujemo hosting i domenu za prvu godinu. Nakon toga, troškovi hostinga su oko 10-15 KM mjesečno."
+      answer: "Da! U sve naše pakete uključujemo hosting i domenu za prvu godinu."
     },
     {
       question: "Mogu li mijenjati sadržaj na sajtu nakon izrade?",
-      answer: "Apsolutno! Svi naši sajtovi dolaze sa jednostavnim CMS sistemom gdje možete mijenjati tekst, slike i osnovne sadržaje bez tehničkog znanja."
+      answer: "Da!"
     },
     {
-      question: "Da li nude održavanje web sajta?",
-      answer: "Da, nudimo pakete održavanja koji uključuju redovne backup-ove, sigurnosne ažuriranja, tehnička poboljšanja i podršku. Cijena održavanja je od 25 KM mjesečno."
+      question: "Da li nudite održavanje web sajta?",
+      answer: "Da, nudimo pakete održavanja koji uključuju redovne backup-ove, sigurnosne ažuriranja, tehnička poboljšanja i podršku."
     },
     {
       question: "Da li moj sajt će biti optimizovan za mobilne uređaje?",
@@ -30,24 +30,25 @@ const FAQOptimized = () => {
     },
     {
       question: "Šta ako nisam zadovoljan rezultatom?",
-      answer: "Nudimo neograničene revizije tokom procesa izrade. Ako i dalje niste zadovoljni, vraćamo vam 100% novca u roku od 30 dana."
+      answer: "Nudimo neograničene revizije tokom procesa izrade. Ako i dalje niste zadovoljni, vraćamo vam 100% novac u roku od 3 dana."
     }
   ] : [
     {
       question: "How long does it take to build a website?",
-      answer: "Basic websites take 7-14 days, while more complex projects can take 3-6 weeks. It all depends on the complexity of functionality and number of pages."
+      answer: "For a basic site, we typically deliver within 5-10 days. More complex projects can take 2-5 weeks depending on functionality and number of pages."
     },
     {
-      question: "Is hosting and domain included in the price?",
-      answer: "Yes! All our packages include hosting and domain for the first year. After that, hosting costs are around 10-15 KM per month."
+     question: "Is hosting and domain included in the price?",  
+      answer: "Yes! All our packages include hosting and domain for the first year."
     },
     {
       question: "Can I change content on the website after it's built?",
-      answer: "Absolutely! All our websites come with a simple CMS system where you can change text, images and basic content without technical knowledge."
+      
+      answer: "Depends on the package you choose. Some include CMS systems that make it easy to update content. We also offer support for content changes."
     },
     {
       question: "Do you offer website maintenance?",
-      answer: "Yes, we offer maintenance packages that include regular backups, security updates, technical improvements and support. Maintenance pricing starts from 25 KM per month."
+      answer: "Yes, we offer maintenance packages that include regular backups, security updates, technical improvements, and support."
     },
     {
       question: "Will my website be optimized for mobile devices?",
@@ -55,7 +56,7 @@ const FAQOptimized = () => {
     },
     {
       question: "What if I'm not satisfied with the result?",
-      answer: "We offer unlimited revisions during the development process. If you're still not satisfied, we'll refund 100% of your money within 30 days."
+      answer: "We offer unlimited revisions during the development process. If you're still not satisfied, we'll refund 100% of your money within 3 days."
     }
   ];
 
