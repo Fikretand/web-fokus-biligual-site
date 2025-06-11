@@ -64,10 +64,9 @@ app.post("/contact", async (req, res) => {
       message: sanitizeInput(parsed.data.message).trim(),
     };
 
-    const saved = await prisma.contactMessage.create({
+    await prisma.contactMessage.create({
       data: sanitizedData,
     });
-    console.log("Contact message saved:", saved);
     res.status(201).json({ success: true });
   } catch (err) {
     console.error(err);
