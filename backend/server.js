@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 const { PrismaClient } = require("@prisma/client");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
@@ -30,6 +31,7 @@ app.use(
 );
 app.use(express.json());
 app.use(compression());
+app.use(helmet());
 
 function authenticate(req, res, next) {
   const password = req.headers["x-admin-password"];
