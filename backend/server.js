@@ -13,6 +13,7 @@ const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3001;
 const ADMIN_PASSWORD = process.env.ADMIN_ACCESS_PASSWORD;
+const ALLOWED_ORIGIN = process.env.PRODUCTION_DOMAIN;
 
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -22,7 +23,11 @@ const contactLimiter = rateLimit({
   message: { error: "Too many requests, please try again later." },
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ALLOWED_ORIGIN,
+  })
+);
 app.use(express.json());
 app.use(compression());
 
