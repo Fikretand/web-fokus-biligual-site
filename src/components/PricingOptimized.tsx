@@ -18,47 +18,51 @@ const PricingOptimized = () => {
       icon: <Star className="h-6 w-6" />,
       features: currentLanguage === 'bs' ? [
         'Do 5 stranica',
-        'Responzivan dizajn',
-        'Kontakt forma',
-        'Google Maps integracija',
-        'SSL sertifikat',
-        '1 godina hosting'
+        'Moderan i responzivan dizajn',
+        'Dvojezičnost (bosanski/engleski)',
+        'SEO optimizacija',
+        'Optimizacija slika',
+        '1 godina hosting + domena GRATIS',
+        'SSL certifikat'
       ] : [
         'Up to 5 pages',
-        'Responsive design',
-        'Contact form',
-        'Google Maps integration',
-        'SSL certificate',
-        '1 year hosting'
+        'Modern and responsive design',
+        'Bilingual (Bosnian/English)',
+        'SEO optimization',
+        'Image optimization',
+        '1 year hosting + domain FREE',
+        'SSL certificate'
       ],
       popular: false
     },
     {
       id: 'pro',
       name: currentLanguage === 'bs' ? 'Profesionalni' : 'Professional',
-      price: '450',
+      price: '400',
       description: currentLanguage === 'bs'
         ? 'Idealan za rastući biznis sa više funkcionalnosti'
         : 'Ideal for growing businesses with more functionality',
       icon: <Zap className="h-6 w-6" />,
       features: currentLanguage === 'bs' ? [
-        'Do 15 stranica',
-        'Responzivan dizajn',
-        'CMS sistem',
-        'SEO optimizacija',
-        'Google Analytics',
-        'Email marketing integracija',
-        'Chat podrška',
-        '1 godina hosting + domena'
+        'Sve u osnovnom paketu',
+        'Do 10 stranica',
+        'Poboljšan, prilagođeni dizajn',
+        'Višejezičnost do 3 jezika',
+        'Napredna galerija slika (lightbox, slideshow, lazy-loading)',
+        'Napredna on-page SEO optimizacija (istraživanje ključnih riječi, alt-opisi, structured data)',
+        'Proširena kontakt/rezervacijska forma',
+        'Integracije (Google maps, društvene mreže)',
+        '1 godina hosting + domena + 3 mjeseca podrške'
       ] : [
-        'Up to 15 pages',
-        'Responsive design',
-        'CMS system',
-        'SEO optimization',
-        'Google Analytics',
-        'Email marketing integration',
-        'Chat support',
-        '1 year hosting + domain'
+        'Everything in the Basic package',
+        'Up to 10 pages',
+        'Enhanced custom design',
+        'Multi-language support up to 3 languages',
+        'Advanced image gallery (lightbox, slideshow, lazy-loading)',
+        'Advanced on-page SEO optimization (keyword research, alt descriptions, structured data)',
+        'Extended contact/booking form',
+        'Integrations (Google Maps, social media)',
+        '1 year hosting + domain + 3 months support'
       ],
       popular: true
     },
@@ -71,23 +75,27 @@ const PricingOptimized = () => {
         : 'Complete solution for serious online business',
       icon: <Crown className="h-6 w-6" />,
       features: currentLanguage === 'bs' ? [
+        'Sve u profesionalnom paketu',
         'Neograničeno stranica',
         'E-commerce funkcionalnost',
-        'Napredna SEO optimizacija',
-        'Analitika i izvještaji',
-        'Rezervacije online',
+        'Premium UX/UI dizajn',
+        'CMS / Admin panel',
+        'Backend logika za dinamične funkcije (online rezervacija / prijava)',
         'Višejezična podrška',
+        'Sveobuhvatna SEO strategija ',
         'Premium podrška 24/7',
-        '2 godine hosting + domena'
+        '1 godina hosting + domena + 6 mjeseci podrške'
       ] : [
+        'Everything in the Professional package',
         'Unlimited pages',
         'E-commerce functionality',
-        'Advanced SEO optimization',
-        'Analytics and reports',
-        'Online booking system',
-        'Multi-language support',
+        'Premium UX/UI design',
+        'CMS / Admin panel',
+        'Backend logic for dynamic features (online booking / registration)',
+        'Multiple language support',
+        'Comprehensive SEO strategy',
         'Premium 24/7 support',
-        '2 years hosting + domain'
+        '1 year hosting + domain + 6 months support'
       ],
       popular: false
     }
@@ -149,7 +157,7 @@ const PricingOptimized = () => {
                   <span className="text-xl text-muted-foreground ml-1">KM</span>
                 </div>
                 <p className="text-sm text-muted-foreground" itemProp="description">
-                  {currentLanguage === 'bs' ? 'Jednovremen plaćanje' : 'One-time payment'}
+                  {currentLanguage === 'bs' ? 'Platiš jednom - imaš uvijek' : 'One-time payment'}
                 </p>
               </div>
 
