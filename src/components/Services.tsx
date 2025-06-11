@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
-import { Palette, Search, Globe, Server, Moon, Zap, Wrench } from "lucide-react";
+import { Icon, figma, googleanalytics, googletranslate, vercel, wordpress, speedtest, githubactions } from "react-3d-icons";
 
 const Services = () => {
   const { t, currentLanguage } = useTranslation();
@@ -8,43 +8,43 @@ const Services = () => {
 
   const services = [
     {
-      icon: <Palette className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={figma} color="#9333ea" scale={8} />,
       title: t('service_design_title'),
       description: t('service_design_desc'),
-      details: t('service_design_details'), // Dodaj detalje u prevodima
+      details: t('service_design_details'),
     },
     {
-      icon: <Search className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={googleanalytics} color="#9333ea" scale={8} />,
       title: t('service_seo_title'),
       description: t('service_seo_desc'),
       details: t('service_seo_details'),
     },
     {
-      icon: <Globe className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={googletranslate} color="#9333ea" scale={8} />,
       title: t('service_multilang_title'),
       description: t('service_multilang_desc'),
       details: t('service_multilang_details'),
     },
     {
-      icon: <Server className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={vercel} color="#9333ea" scale={8} />,
       title: t('service_hosting_title'),
       description: t('service_hosting_desc'),
       details: t('service_hosting_details'),
     },
     {
-      icon: <Moon className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={wordpress} color="#9333ea" scale={8} />,
       title: t('service_themes_title'),
       description: t('service_themes_desc'),
       details: t('service_themes_details'),
     },
     {
-      icon: <Zap className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={speedtest} color="#9333ea" scale={8} />,
       title: t('service_speed_title'),
       description: t('service_speed_desc'),
       details: t('service_speed_details'),
     },
     {
-      icon: <Wrench className="h-8 w-8 text-purple-600" />,
+      icon: <Icon file={githubactions} color="#9333ea" scale={8} />,
       title: t('service_maintenance_title'),
       description: t('service_maintenance_desc'),
       details: t('service_maintenance_details'),
