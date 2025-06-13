@@ -24,11 +24,17 @@ const contactLimiter = rateLimit({
   message: { error: "Too many requests, please try again later." },
 });
 
-app.use(
-  cors({
-    origin: ALLOWED_ORIGIN,
-  })
-);
+if (!ALLOWED_ORIGIN) {
+  console.error(
+    "ALLOWED_ORIGIN environment variable not set. CORS will be disabled."
+  );
+} else {
+  app.use(
+    cors({
+      origin: ALLOWED_ORIGIN,
+    })
+  );
+}
 app.use(express.json());
 app.use(compression());
 app.use(helmet());
