@@ -18,7 +18,7 @@ const ALLOWED_ORIGIN = process.env.PRODUCTION_DOMAIN;
 
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: 10,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Too many requests, please try again later." },
@@ -32,6 +32,7 @@ app.use(
 app.use(express.json());
 app.use(compression());
 app.use(helmet());
+app.use(cors());
 
 function authenticate(req, res, next) {
   const password = req.headers["x-admin-password"];

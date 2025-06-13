@@ -9,11 +9,11 @@ const FAQOptimized = () => {
 
   const faqs = currentLanguage === 'bs' ? [
     {
-      question: "Koliko vrijeme treba za izradu web sajta?",
+      question: "Koje je vrijeme potrebno za izradu web sajta?",
       answer: "Osnovni sajt izradimo za 5-10 dana, dok kompleksniji projekti mogu potrajati 2-5 sedmica. Sve ovisi o složenosti, funkcionalnosti i broju stranica."
     },
     {
-      question: "Da li je hosting i domena uključena u cijenu?",
+      question: "Da li su hosting i domena uključeni u cijenu?",
       answer: "Da! U sve naše pakete uključujemo hosting i domenu za prvu godinu."
     },
     {

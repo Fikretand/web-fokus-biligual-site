@@ -1,13 +1,25 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, User, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const reviewIcons = [
+  <Quote className="h-8 w-8" />,
+  <User className="h-8 w-8" />,
+  <Star className="h-8 w-8" />,
+  <Quote className="h-8 w-8" />,
+  <User className="h-8 w-8" />,
+  <Star className="h-8 w-8" />,
+];
 
 const Reviews = () => {
   const { t } = useTranslation();
   const [currentReview, setCurrentReview] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Touch state
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const reviews = [
     {
@@ -44,25 +56,39 @@ const Reviews = () => {
 
   useEffect(() => {
     if (!isAutoPlaying) return;
-    
     const interval = setInterval(() => {
       setCurrentReview((prev) => (prev + 1) % reviews.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [isAutoPlaying, reviews.length]);
 
-  const nextReview = () => {
-    setCurrentReview((prev) => (prev + 1) % reviews.length);
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
   };
 
-  const prevReview = () => {
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
   };
 
-  const goToReview = (index: number) => {
-    setCurrentReview(index);
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const distance = touchStartX.current - touchEndX.current;
+      if (distance > 50) {
+        // swipe left
+        setCurrentReview((prev) => (prev + 1) % reviews.length);
+      } else if (distance < -50) {
+        // swipe right
+        setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
+
+  const nextReview = () => setCurrentReview((prev) => (prev + 1) % reviews.length);
+  const prevReview = () => setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  const goToReview = (index: number) => setCurrentReview(index);
 
   return (
     <section id="reviews" className="py-20 bg-background">
@@ -76,67 +102,77 @@ const Reviews = () => {
           </p>
         </div>
 
-        <div 
-          className="reviews-carousel max-w-4xl mx-auto relative"
+        <div
+          className="relative max-w-3xl mx-auto"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <div className="overflow-hidden">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentReview * 100}%)` }}
             >
               {reviews.map((review, index) => (
                 <div
                   key={index}
-                  className={`review-card w-full flex-shrink-0 text-center px-8 ${
-                    index === currentReview ? 'active' : ''
-                  }`}
+                  className="w-full flex-shrink-0 px-2"
                 >
-                  <div className="bg-card border border-border rounded-lg p-8 mx-auto max-w-2xl">
-                    <div className="flex justify-center mb-4">
+                  <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col items-center">
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center bg-primary/10 text-primary mb-4">
+                      {reviewIcons[index % reviewIcons.length]}
+                    </div>
+                    <h4 className="font-semibold text-lg mb-1 text-foreground">
+                      {review.author}
+                    </h4>
+                    <div className="text-yellow-400 text-lg mb-4 flex">
                       {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                        <Star key={i} className="h-5 w-5 fill-current" />
                       ))}
                     </div>
-                    <blockquote className="text-lg italic mb-6 text-muted-foreground">
+                    <p className="text-gray-700 dark:text-gray-200 italic leading-relaxed text-center">
                       "{review.text}"
-                    </blockquote>
-                    <cite className="font-semibold text-foreground">— {review.author}</cite>
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* Carousel arrows */}
           <Button
             variant="outline"
             size="icon"
             onClick={prevReview}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4"
+            aria-label="Previous review"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-
           <Button
             variant="outline"
             size="icon"
             onClick={nextReview}
             className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4"
+            aria-label="Next review"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
 
-          <div className="carousel-dots flex justify-center space-x-2 mt-8">
+          {/* Carousel dots */}
+          <div className="flex justify-center mt-8 gap-2">
             {reviews.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToReview(index)}
-                className={`dot w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentReview 
-                    ? 'bg-primary scale-125' 
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentReview
+                    ? 'bg-primary scale-125'
                     : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
                 }`}
+                aria-label={`Go to review ${index + 1}`}
               />
             ))}
           </div>

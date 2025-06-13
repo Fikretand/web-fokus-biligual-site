@@ -38,7 +38,7 @@ const Contact = () => {
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-muted-foreground" />
                 <div>
-                  <p className="font-medium">+387 61 234 567</p>
+                  <p className="font-medium">+387 63 851 438</p>
                   <p className="text-sm text-muted-foreground">
                     {currentLanguage === 'bs' ? 'Pozovite nas' : 'Call us'}
                   </p>

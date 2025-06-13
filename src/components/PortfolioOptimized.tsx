@@ -37,8 +37,7 @@ const PortfolioOptimized = () => {
       features: currentLanguage === 'bs' 
         ? ['Online rezervacije', 'Galerija slika', 'Kontakt forma', 'Responzivan dizajn']
         : ['Online booking', 'Image gallery', 'Contact form', 'Responsive design']
-    },
-    {
+    },{
       id: 'beauty-salon',
       title: currentLanguage === 'bs' ? 'Salon ljepote Atelier Rosa' : 'Atelier Rosa Beauty Salon',
       description: currentLanguage === 'bs'
@@ -51,6 +50,21 @@ const PortfolioOptimized = () => {
       features: currentLanguage === 'bs'
         ? ['Galerija radova', 'Cenik usluga', 'Lokacija', 'Mobilna optimizacija']
         : ['Work gallery', 'Service pricing', 'Location', 'Mobile optimization']
+    },
+  
+    {
+      id: 'german courses',
+      title: currentLanguage === 'bs' ? 'Njemački jezik - online kursevi' : 'German Language - Online Courses',
+      description: currentLanguage === 'bs' 
+        ? 'Interaktivni sajt za online kurseve njemačkog jezika sa video lekcijama'
+        : 'Interactive website for online German language courses with video lessons',
+      image: '/portfolio/german-courses.webp',  
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+      category: 'business',
+      url: 'https://skolanjemackogjezika.netlify.app/', 
+      features: currentLanguage === 'bs' 
+        ? ['Video lekcije', 'Interaktivne vježbe', 'Online testovi', 'Responzivan dizajn']
+        : ['Video lessons', 'Interactive exercises', 'Online tests', 'Responsive design']
     }
   ];
 
@@ -93,80 +107,94 @@ const PortfolioOptimized = () => {
           ))}
         </div>
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <article
-              key={project.id}
-              className="portfolio-card bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={`Screenshot ${currentLanguage === 'bs' ? 'sajta' : 'of'} ${project.title}`}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                  width="400"
-                  height="200"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-foreground">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
-                
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <span className="text-xs text-muted-foreground">
-                      +{project.technologies.length - 3} more
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSelectedProject(project)}
-                    className="flex-1"
-                  >
-                    <Code className="h-4 w-4 mr-2" />
-                    {currentLanguage === 'bs' ? 'Detalji' : 'Details'}
-                  </Button>
-                  {project.url && (
-                    <Button
-                      variant="default"
-                      size="sm"
-                      asChild
-                      className="flex-1"
-                    >
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${currentLanguage === 'bs' ? 'Posjetite' : 'Visit'} ${project.title}`}
-                      >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        {currentLanguage === 'bs' ? 'Posjeti' : 'Visit'}
-                      </a>
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
+{/* Projects grid */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {filteredProjects.length > 0 ? (
+    filteredProjects.map((project, index) => (
+      <article
+        key={project.id}
+        className="portfolio-card bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group"
+        style={{ animationDelay: `${index * 0.1}s` }}
+      >
+        <div className="relative overflow-hidden">
+          <img
+            src={project.image}
+            alt={`Screenshot ${currentLanguage === 'bs' ? 'sajta' : 'of'} ${project.title}`}
+            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            width="400"
+            height="200"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
         </div>
+        
+        <div className="p-6">
+          <h3 className="text-xl font-semibold mb-2 text-foreground">{project.title}</h3>
+          <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
+          
+          {/* Technologies */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.technologies.slice(0, 3).map((tech) => (
+              <span
+                key={tech}
+                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary"
+              >
+                {tech}
+              </span>
+            ))}
+            {project.technologies.length > 3 && (
+              <span className="text-xs text-muted-foreground">
+                +{project.technologies.length - 3} more
+              </span>
+            )}
+          </div>
+
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setSelectedProject(project)}
+              className="flex-1"
+            >
+              <Code className="h-4 w-4 mr-2" />
+              {currentLanguage === 'bs' ? 'Detalji' : 'Details'}
+            </Button>
+            {project.url && (
+              <Button
+                variant="default"
+                size="sm"
+                asChild
+                className="flex-1"
+              >
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${currentLanguage === 'bs' ? 'Posjetite' : 'Visit'} ${project.title}`}
+                >
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  {currentLanguage === 'bs' ? 'Posjeti' : 'Visit'}
+                </a>
+              </Button>
+            )}
+          </div>
+        </div>
+      </article>
+    ))
+  ) : (
+    <div className="col-span-full flex flex-col items-center justify-center py-16">
+      <span className="text-3xl font-bold text-primary mb-2">
+        {currentLanguage === 'bs' ? 'USKORO DOSTUPNO' : 'COMING SOON'}
+      </span>
+      <span className="text-muted-foreground text-lg">
+        {currentLanguage === 'bs'
+          ? 'Radimo na novim projektima u ovoj kategoriji.'
+          : 'We are working on new projects in this category.'}
+      </span>
+    </div>
+  )}
+</div>
+
 
         {/* Modal */}
         {selectedProject && (

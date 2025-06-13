@@ -84,7 +84,7 @@ const WebFokusHome = () => {
       
       {/* WhatsApp Float Button with enhanced accessibility */}
       <a 
-        href="https://wa.me/38761234567?text=Zdravo%21%20Zainteresovan%20sam%20za%20izradu%20web%20sajta." 
+        href="https://wa.me/38763851438?text=Zdravo%21%20Zainteresovan%20sam%20za%20izradu%20web%20sajta." 
         className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 z-50 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
         aria-label={currentLanguage === 'bs' ? 'Kontaktirajte nas putem WhatsApp-a' : 'Contact us via WhatsApp'}
         target="_blank"
