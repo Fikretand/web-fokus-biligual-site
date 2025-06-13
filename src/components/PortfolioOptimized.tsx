@@ -1,5 +1,5 @@
 
-import React, { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
 import { ExternalLink, Code, Smartphone, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
 import { X, ExternalLink, Monitor, Smartphone, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
