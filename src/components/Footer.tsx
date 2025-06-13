@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="space-y-2 text-muted-foreground">
               <p>Sarajevo, Bosnia and Herzegovina</p>
               <p>info@webfokus.ba</p>
-              <p>+387 61 234 567</p>
+              <p>+ 387 63 851 438</p>
             </div>
           </div>
         </div>
