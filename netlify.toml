@@ -1,0 +1,10 @@
+[build]
+  publish = "dist" # zamijeni ako koristiš drugi folder za produkciju
+  command = "npm run build" # ili npr. vite build
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs]
+    # Ovo je opciono – definira pragove ispod kojih će deploy failati
+    thresholds = { performance = 0.6, accessibility = 0.7, seo = 0.7 }
