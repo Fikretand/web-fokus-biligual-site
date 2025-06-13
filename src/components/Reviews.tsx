@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from "@/hooks/useTranslation";
 import { Star, ChevronLeft, ChevronRight, User, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";

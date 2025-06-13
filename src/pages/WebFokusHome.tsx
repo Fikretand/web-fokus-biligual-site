@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -8,7 +8,7 @@ import Process from "@/components/Process";
 import PricingOptimized from "@/components/PricingOptimized";
 import Reviews from "@/components/Reviews";
 import FAQOptimized from "@/components/FAQOptimized";
-import Contact from "@/components/Contact";
+const Contact = lazy(() => import("@/components/Contact"));
 import Footer from "@/components/Footer";
 import { useTheme } from "@/hooks/useTheme";
 import { useSEO } from "@/hooks/useSEO";
@@ -78,7 +78,9 @@ const WebFokusHome = () => {
         <PricingOptimized />
         <Reviews />
         <FAQOptimized />
-        <Contact />
+        <Suspense fallback={<div className="py-12 text-center">Loading...</div>}>
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
       
