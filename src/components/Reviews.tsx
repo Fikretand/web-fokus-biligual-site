@@ -120,22 +120,22 @@ const Reviews = () => {
                   key={index}
                   className="w-full flex-shrink-0 px-2"
                 >
-                  <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col items-center">
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center bg-primary/10 text-primary mb-4">
-                      {reviewIcons[index % reviewIcons.length]}
-                    </div>
-                    <h4 className="font-semibold text-lg mb-1 text-foreground">
-                      {review.author}
-                    </h4>
-                    <div className="text-yellow-400 text-lg mb-4 flex">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-current" />
-                      ))}
-                    </div>
-                    <p className="text-gray-700 dark:text-gray-200 italic leading-relaxed text-center">
-                      "{review.text}"
-                    </p>
-                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col items-center text-center">
+  <div className="w-14 h-14 rounded-full flex items-center justify-center bg-primary/10 text-primary mb-4">
+    {reviewIcons[index % reviewIcons.length]}
+  </div>
+  <h4 className="font-semibold text-lg mb-1 text-foreground">
+    {review.author}
+  </h4>
+  <div className="text-yellow-400 text-lg mb-4 flex justify-center">
+    {[...Array(review.rating)].map((_, i) => (
+      <Star key={i} className="h-5 w-5 fill-current" />
+    ))}
+  </div>
+  <p className="text-gray-700 dark:text-gray-200 italic leading-relaxed text-center">
+    "{review.text}"
+  </p>
+</div>
                 </div>
               ))}
             </div>
