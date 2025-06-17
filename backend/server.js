@@ -24,21 +24,23 @@ const contactLimiter = rateLimit({
   message: { error: "Too many requests, please try again later." },
 });
 
-if (!ALLOWED_ORIGIN) {
-  console.error(
-    "ALLOWED_ORIGIN environment variable not set. CORS will be disabled."
-  );
-} else {
-  app.use(
-    cors({
-      origin: ALLOWED_ORIGIN,
-    })
-  );
-}
+const allowedOrigins = [ALLOWED_ORIGIN];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(compression());
 app.use(helmet());
-app.use(cors());
+
 
 function authenticate(req, res, next) {
   const password = req.headers["x-admin-password"];

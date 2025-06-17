@@ -28,7 +28,7 @@ const PortfolioOptimized = () => {
       id: 'apartman-rental',
       title: currentLanguage === 'bs' ? 'Apartman Ilidža' : 'Apartment Rental Ilidža',
       description: currentLanguage === 'bs' 
-        ? 'Moderni sajt za iznajmljivanje apartmana sa online rezervacijama'
+        ? 'Moderni website za iznajmljivanje apartmana sa online rezervacijama'
         : 'Modern apartment rental website with online booking system',
       image: '/portfolio/apartman.webp',
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
@@ -41,8 +41,8 @@ const PortfolioOptimized = () => {
       id: 'beauty-salon',
       title: currentLanguage === 'bs' ? 'Salon ljepote Atelier Rosa' : 'Atelier Rosa Beauty Salon',
       description: currentLanguage === 'bs'
-        ? 'Elegantni sajt za salon lepote sa galerijom radova i cenikom'
-        : 'Elegant beauty salon website with portfolio gallery and pricing',
+        ? 'Elegantni website za salon ljepote sa galerijom radova i cjenovnikom usluga'
+        : 'Elegant beauty salon website with portfolio gallery and pricing list',
       image: '/portfolio/salon.webp',
       technologies: ['React', 'CSS3', 'JavaScript', 'Node.js'],
       category: 'business',
@@ -56,7 +56,7 @@ const PortfolioOptimized = () => {
       id: 'german courses',
       title: currentLanguage === 'bs' ? 'Njemački jezik - online kursevi' : 'German Language - Online Courses',
       description: currentLanguage === 'bs' 
-        ? 'Interaktivni sajt za online kurseve njemačkog jezika sa video lekcijama'
+        ? 'Interaktivni website za online kurseve njemačkog jezika sa video lekcijama'
         : 'Interactive website for online German language courses with video lessons',
       image: '/portfolio/german-courses.webp',  
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
@@ -182,16 +182,16 @@ const PortfolioOptimized = () => {
       </article>
     ))
   ) : (
-    <div className="col-span-full flex flex-col items-center justify-center py-16">
-      <span className="text-3xl font-bold text-primary mb-2">
-        {currentLanguage === 'bs' ? 'USKORO DOSTUPNO' : 'COMING SOON'}
-      </span>
-      <span className="text-muted-foreground text-lg">
-        {currentLanguage === 'bs'
-          ? 'Radimo na novim projektima u ovoj kategoriji.'
-          : 'We are working on new projects in this category.'}
-      </span>
-    </div>
+      <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
+        <span className="text-3xl font-bold text-primary mb-2">
+          {currentLanguage === 'bs' ? 'USKORO DOSTUPNO' : 'COMING SOON'}
+        </span>
+        <span className="text-muted-foreground text-lg">
+          {currentLanguage === 'bs'
+            ? 'Radimo na novim projektima u ovoj kategoriji.'
+            : 'We are working on new projects in this category.'}
+        </span>
+      </div>
   )}
 </div>
 
