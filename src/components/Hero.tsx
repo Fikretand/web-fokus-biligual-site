@@ -11,8 +11,8 @@ const Hero = () => {
     }
   };
 
-  const scrollToPortfolio = () => {
-    const element = document.getElementById('portfolio');
+  const scrollToPricing = () => {
+    const element = document.getElementById('pricing');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -45,7 +45,7 @@ const Hero = () => {
             <Button
               variant="secondary"
               size="lg"
-              onClick={scrollToPortfolio}
+              onClick={scrollToPricing}
               className="btn bg-white/80 dark:bg-white/10 text-gray-900 dark:text-white font-semibold rounded-lg shadow-lg border border-gray-300 dark:border-white/20"
             >
               {t('hero_portfolio')}
