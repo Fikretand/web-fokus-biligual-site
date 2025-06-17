@@ -60,6 +60,19 @@ const FAQOptimized = () => {
     }
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(faq => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
+
 const toggleItem = (index: number) => {
     setOpenItems(prev =>
       prev.includes(index)
@@ -70,6 +83,10 @@ const toggleItem = (index: number) => {
 
   return (
     <section id="faq" className="py-20 bg-gradient-to-b from-muted/60 to-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
